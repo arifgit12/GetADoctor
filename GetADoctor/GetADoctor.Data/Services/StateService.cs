@@ -11,6 +11,8 @@ namespace GetADoctor.Data.Services
     public interface IStateService
     {
         IEnumerable<State> GetStates();
+        State GetState(int id);
+        void SaveState(State state);
     }
     public class StateService : IStateService
     {
@@ -20,9 +22,21 @@ namespace GetADoctor.Data.Services
         {
             this.stateRepository = stateRepository;
         }
+
+        public State GetState(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<State> GetStates()
         {
             return stateRepository.GetAll();
+        }
+
+        public void SaveState(State state)
+        {
+            this.stateRepository.Add(state);
+            this.stateRepository.SaveChanges();
         }
     }
 }

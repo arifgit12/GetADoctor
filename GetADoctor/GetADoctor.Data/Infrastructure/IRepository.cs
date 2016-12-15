@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace GetADoctor.Data.Repositories
+namespace GetADoctor.Data.Infrastructure
 {
     public interface IRepository<T> where T : class
     {

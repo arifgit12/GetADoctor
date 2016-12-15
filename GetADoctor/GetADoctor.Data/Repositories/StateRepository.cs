@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using GetADoctor.Data.Infrastructure;
 
 namespace GetADoctor.Data.Repositories
 {

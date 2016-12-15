@@ -5,13 +5,13 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace GetADoctor.Data.Repositories
+namespace GetADoctor.Data.Infrastructure
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private DbContext context;
+        private ApplicationDbContext context;
         private IDbSet<T> set;
-        public Repository(DbContext context)
+        public Repository(ApplicationDbContext context)
         {
             this.context = context;
             this.set = context.Set<T>();
