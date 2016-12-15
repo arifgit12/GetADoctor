@@ -1,12 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GetADoctor.Models
 {
-    public class Rating
+    public class Rating : SystemEntity
     {
+        [Required]
+        public int Value { get; set; }
+
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
+
+        [ForeignKey("Doctor")]
+        public int DoctorId { get; set; }
+        public virtual Doctor Doctor { get; set; }
     }
 }
