@@ -65,7 +65,8 @@ namespace GetADoctor.Data.Infrastructure
                 {
                     foreach (var ve in eve.ValidationErrors)
                     {
-                        int i = 5;
+                        int i = -1;
+                        i++;
                     }
                 }
                 throw e;

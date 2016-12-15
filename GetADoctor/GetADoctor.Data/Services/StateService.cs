@@ -12,7 +12,7 @@ namespace GetADoctor.Data.Services
     {
         IEnumerable<State> GetStates();
         State GetState(int id);
-        void SaveState(State state);
+        int SaveState(State state);
     }
     public class StateService : IStateService
     {
@@ -33,10 +33,10 @@ namespace GetADoctor.Data.Services
             return stateRepository.GetAll();
         }
 
-        public void SaveState(State state)
+        public int SaveState(State state)
         {
             this.stateRepository.Add(state);
-            this.stateRepository.SaveChanges();
+            return this.stateRepository.SaveChanges();
         }
     }
 }

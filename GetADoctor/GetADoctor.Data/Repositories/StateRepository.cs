@@ -11,7 +11,7 @@ namespace GetADoctor.Data.Repositories
 {
     public class StateRepository : Repository<State>, IStateRepository
     {
-        public StateRepository(DbContext context) : base(context)
+        public StateRepository(ApplicationDbContext context) : base(context)
         {
 
         }
