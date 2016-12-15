@@ -1,10 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GetADoctor.Models
 {
     public class Waiting : SystemEntity
     {
+        [Key]
+        public int Id { get; set; }
         public String Name { get; set; }
         public int Serial { get; set; }
         public String Date { get; set; }

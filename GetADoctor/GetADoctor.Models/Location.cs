@@ -5,12 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GetADoctor.Models
 {
-    public class Location
+    public class Location : SystemEntity
     {
         [Key]
         public int LocationId { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public DateTime? UpdatedOn { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
 

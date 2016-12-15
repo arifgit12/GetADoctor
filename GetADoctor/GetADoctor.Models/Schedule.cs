@@ -1,10 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GetADoctor.Models
 {
     public class Schedule : SystemEntity
     {
+        [Key]
+        public int Id { get; set; }
         public String Dates { get; set; }
         public int FromHour { get; set; }
         public int FromMinute { get; set; }

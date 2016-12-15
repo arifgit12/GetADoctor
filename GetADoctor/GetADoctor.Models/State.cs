@@ -12,6 +12,9 @@ namespace GetADoctor.Models
             this.cities = new HashSet<City>();
         }
 
+        [Key]
+        public int Id { get; set; }
+
         [Required]
         [Index(IsUnique = true)]
         [MaxLength(40)]

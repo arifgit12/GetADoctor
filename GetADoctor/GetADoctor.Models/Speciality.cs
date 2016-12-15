@@ -13,6 +13,9 @@ namespace GetADoctor.Models
         {
             this.doctors = new HashSet<Doctor>();
         }
+
+        [Key]
+        public int Id { get; set; }
         public int Code { get; set; }
 
         [Required]

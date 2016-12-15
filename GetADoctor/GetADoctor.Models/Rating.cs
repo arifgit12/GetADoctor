@@ -6,6 +6,9 @@ namespace GetADoctor.Models
 {
     public class Rating : SystemEntity
     {
+        [Key]
+        public int Id { get; set; }
+
         [Required]
         public int Value { get; set; }
 

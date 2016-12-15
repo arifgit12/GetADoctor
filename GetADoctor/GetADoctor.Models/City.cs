@@ -7,6 +7,9 @@ namespace GetADoctor.Models
 {
     public class City : SystemEntity
     {
+        [Key]
+        public int CityId { get; set; }
+
         [Required]
         [Index(IsUnique = true)]
         [MaxLength(40)]

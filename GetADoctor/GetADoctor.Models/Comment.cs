@@ -6,6 +6,9 @@ namespace GetADoctor.Models
 {
     public class Comment : SystemEntity
     {
+        [Key]
+        public int Id { get; set; }
+
         [Required]
         public string Content { get; set; }
 
@@ -13,7 +16,7 @@ namespace GetADoctor.Models
         public string WaitingTime { get; set; }
 
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
 
         [ForeignKey("Doctor")]
