@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetADoctor.Models", "GetADoctor.Models\GetADoctor.Models.csproj", "{37021AAC-21D1-442D-9534-3C4EBC696D21}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetADoctor.Data", "GetADoctor.Data\GetADoctor.Data.csproj", "{8ACDBA60-081D-42E5-87CF-CCC52DB0A30D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetADoctor.Web", "GetADoctor.Web\GetADoctor.Web.csproj", "{0E633ADF-B4F0-458C-AD0D-B10506DFE0A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetADoctor.Web.Tests", "GetADoctor.Web.Tests\GetADoctor.Web.Tests.csproj", "{5A822E5F-905C-4E8A-A442-E7ECDEF5CB03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{8ACDBA60-081D-42E5-87CF-CCC52DB0A30D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8ACDBA60-081D-42E5-87CF-CCC52DB0A30D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8ACDBA60-081D-42E5-87CF-CCC52DB0A30D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E633ADF-B4F0-458C-AD0D-B10506DFE0A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E633ADF-B4F0-458C-AD0D-B10506DFE0A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E633ADF-B4F0-458C-AD0D-B10506DFE0A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E633ADF-B4F0-458C-AD0D-B10506DFE0A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A822E5F-905C-4E8A-A442-E7ECDEF5CB03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A822E5F-905C-4E8A-A442-E7ECDEF5CB03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A822E5F-905C-4E8A-A442-E7ECDEF5CB03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A822E5F-905C-4E8A-A442-E7ECDEF5CB03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
