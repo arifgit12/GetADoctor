@@ -1,5 +1,8 @@
-﻿using GetADoctor.Web.Infrastructure.Mapping;
+﻿using GetADoctor.Data.Infrastructure;
+using GetADoctor.Data.Migrations;
+using GetADoctor.Web.Infrastructure.Mapping;
 using System;
+using System.Data.Entity;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
