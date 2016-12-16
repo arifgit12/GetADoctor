@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace GetADoctor.Web.Controllers
+namespace GetADoctor.Web.Areas
 {
     public class HomeController : Controller
     {

@@ -8,7 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GetADoctor.Web.Models;
 
-namespace GetADoctor.Web.Controllers
+namespace GetADoctor.Web.Areas
 {
     [Authorize]
     public class ManageController : Controller

@@ -11,7 +11,7 @@ using Microsoft.Owin.Security;
 using GetADoctor.Web.Models;
 using GetADoctor.Models;
 
-namespace GetADoctor.Web.Controllers
+namespace GetADoctor.Web.Areas
 {
     [Authorize]
     public class AccountController : Controller

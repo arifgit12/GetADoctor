@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace GetADoctor.Web.Areas.Admin.Controllers
 {
+    [Authorize]
     public class StatesController : Controller
     {
         private readonly IStateService stateService;
