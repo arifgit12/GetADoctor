@@ -1,0 +1,42 @@
+﻿@model IEnumerable<GetADoctor.Web.Areas.Admin.Models.CityViewModel>
+@{
+    ViewBag.Title = "Avaiable Cities";
+}
+
+<div class="row">
+    <div class="top-bottom-padding">
+        <h2>@ViewBag.Title</h2>
+        <p>
+            @Html.ActionLink("Add New City", "Create")
+        </p>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.CityName)</th>
+                <th>@Html.DisplayNameFor(model => model.CreatedOn)</th>
+                <th>@Html.DisplayNameFor(model => model.UpdatedOn)</th>
+                <th>@Html.DisplayNameFor(model => model.State.StateName)</th>
+                <th>Action</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.CityName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CreatedOn)</td>
+                    <td>@Html.DisplayFor(modelItem => item.UpdatedOn)</td>
+                    <td>@Html.DisplayFor(modelItem => item.State.StateName)</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.CityId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.CityId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CityId })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

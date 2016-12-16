@@ -66,6 +66,9 @@ namespace GetADoctor.Web.App_Start
         {
             kernel.Bind<IStateRepository>().To<StateRepository>();
             kernel.Bind<IStateService>().To<StateService>();
+
+            kernel.Bind<ICityRepository>().To<CityRepository>();
+            kernel.Bind<ICityService>().To<CityService>();
         }
     }
 }

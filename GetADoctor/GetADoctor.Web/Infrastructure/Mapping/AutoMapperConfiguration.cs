@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using GetADoctor.Models;
+using GetADoctor.Web.Areas.Admin.Models;
+using System;
 
 namespace GetADoctor.Web.Infrastructure.Mapping
 {
@@ -11,6 +10,12 @@ namespace GetADoctor.Web.Infrastructure.Mapping
         {
             AutoMapper.Mapper.Initialize(config => 
             {
+                config.CreateMap<StateViewModel, State>();
+                config.CreateMap<State, StateViewModel>();
+
+                config.CreateMap<CityViewModel, City>();
+                config.CreateMap<City, CityViewModel>();
+
 
             });
         }
