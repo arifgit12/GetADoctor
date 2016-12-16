@@ -58,6 +58,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\ApplicationDbContext.cs" />
+    <Compile Include="Migrations\201612162047030_intialcreate.cs" />
+    <Compile Include="Migrations\201612162047030_intialcreate.Designer.cs">
+      <DependentUpon>201612162047030_intialcreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\IRepository.cs" />
     <Compile Include="Infrastructure\Repository.cs" />
@@ -66,7 +71,11 @@
     <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\StateService.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612162047030_intialcreate.resx">
+      <DependentUpon>201612162047030_intialcreate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

@@ -1,4 +1,5 @@
-﻿using GetADoctor.Models;
+﻿using GetADoctor.Data.Migrations;
+using GetADoctor.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,10 @@ namespace GetADoctor.Data.Infrastructure
         {
             //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
+            //Database.SetInitializer<ApplicationDbContext>(new CreateDatabaseIfNotExists<ApplicationDbContext>());
+            //Database.SetInitializer<ApplicationDbContext>(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
+            //Database.SetInitializer<ApplicationDbContext>(new DropCreateDatabaseAlways<ApplicationDbContext>());
+            Database.SetInitializer<ApplicationDbContext>(new Configuration());
         }
 
         public DbSet<Patient> Patients { get; set; }
