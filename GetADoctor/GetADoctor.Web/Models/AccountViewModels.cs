@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GetADoctor.Web.Models
@@ -79,6 +80,55 @@ namespace GetADoctor.Web.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class RegisterDoctorModel
+    {
+        [Required]
+        public String FirstName { get; set; }
+
+        [Required]
+        public String LastName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public String Email { get; set; }
+
+        [Required]
+        public String Password { get; set; }
+
+        [Required]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Entered phone number is not valid.")]
+        public String MobileNumber { get; set; }
+
+        [Required]
+        [MaxLength(10)]
+        [Display(Name = "Unique Identification Number")]
+        public string UIN { get; set; }
+
+        [Required]
+        [Compare("Password")]
+        public String ConfirmPassword { get; set; }
+
+        //[Required]
+        public String Role { get; set; }
+    }
+
+    public class RegisterPatientModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public String Email { get; set; }
+
+        [Required]
+        [Display(Name = "Password")]
+        public String Password { get; set; }
+
+        [Required]
+        [Compare("Password")]
+        [Display(Name = "Confirm Password")]
+        public String ConfirmPassword { get; set; }
     }
 
     public class ResetPasswordViewModel

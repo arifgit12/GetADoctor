@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GetADoctor.Web.Models;
 using GetADoctor.Models;
+using GetADoctor.Data.Services;
 
 namespace GetADoctor.Web.Areas
 {
@@ -18,15 +19,44 @@ namespace GetADoctor.Web.Areas
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IDoctorService _doctorService;
+        private IPatientservice _patientService;
 
-        public AccountController()
-        {
-        }
+        //public AccountController()
+        //{
+        //}
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IDoctorService doctorService, IPatientservice patientService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            DoctorService = doctorService;
+            PatientService = patientService;
+        }
+
+        public IDoctorService DoctorService
+        {
+            get
+            {
+                return _doctorService;
+            }
+            private set
+            {
+                _doctorService = value;
+            }
+        }
+
+        public IPatientservice PatientService
+        {
+            get
+            {
+                return _patientService;
+            }
+
+            private set
+            {
+                _patientService = value;
+            }
         }
 
         public ApplicationSignInManager SignInManager
@@ -133,6 +163,97 @@ namespace GetADoctor.Web.Areas
                     ModelState.AddModelError("", "Invalid code.");
                     return View(model);
             }
+        }
+
+        //
+        // GET: /Account/RegisterAsDoctor
+        [AllowAnonymous]
+        public ActionResult RegisterAsDoctor()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterAsDoctor(RegisterDoctorModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    UserManager.AddToRole(user.Id, UserRoles.Doctor.ToString());
+                    var doctor = new Doctor();
+                    doctor.UserId = user.Id;
+                    doctor.LastName = model.LastName;
+                    doctor.FirstName = model.FirstName;
+                    doctor.UIN = model.UIN;
+                    doctor.MobileNumber = model.MobileNumber;
+                    var isSave =  _doctorService.SaveDoctor(doctor);
+                    //_doctorService.SaveAddress(new Location(), user.Id);
+                    //await _doctorService.SaveSchedule(new Schedule(), user.Id);
+                    if(isSave > 0)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                    
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        //
+        // GET: /Account/RegisterAsPatient
+        [AllowAnonymous]
+        public ActionResult RegisterAsPatient()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+        //
+        // POST: /Account/RegisterAsPatient
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterAsPatient(RegisterPatientModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    UserManager.AddToRole(user.Id, UserRoles.Patient.ToString());
+                    var patient = new Patient();
+                    patient.UserId = user.Id;
+                    var isSave = _patientService.SavePatient(patient);
+
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
 
         //

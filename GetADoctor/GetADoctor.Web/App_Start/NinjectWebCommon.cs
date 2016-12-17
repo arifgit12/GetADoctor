@@ -13,6 +13,11 @@ namespace GetADoctor.Web.App_Start
     using Data.Infrastructure;
     using Data.Services;
     using Data.Repositories;
+    using GetADoctor.Models;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+    using Ninject.Activation;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     public static class NinjectWebCommon 
     {
@@ -64,11 +69,33 @@ namespace GetADoctor.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IStateRepository>().To<StateRepository>();
-            kernel.Bind<IStateService>().To<StateService>();
+            kernel.Bind<IUserStore<ApplicationUser>>().To<UserStore<ApplicationUser>>();
+            kernel.Bind<UserManager<ApplicationUser>>().ToSelf();
 
+            kernel.Bind<ApplicationUserManager>().ToMethod(GetOwinInjection<ApplicationUserManager>);
+            kernel.Bind<ApplicationSignInManager>().ToMethod(GetOwinInjection<ApplicationSignInManager>);
+
+            kernel.Bind<IAppointmentRepository>().To<AppointmentRepository>();
             kernel.Bind<ICityRepository>().To<CityRepository>();
+            kernel.Bind<ILocationRepository>().To<LocationRepository>();
+            kernel.Bind<IDoctorRepository>().To<DoctorRepository>();
+            kernel.Bind<IPatientRepository>().To<PatientRepository>();
+            kernel.Bind<IScheduleRepository>().To<ScheduleRepository>();
+            kernel.Bind<ISpecialityRepository>().To<SpecialityRepository>();
+            kernel.Bind<IStateRepository>().To<StateRepository>();
+            kernel.Bind<IWaitingRepository>().To<WaitingRepository>();
+
+            kernel.Bind<IStateService>().To<StateService>();
             kernel.Bind<ICityService>().To<CityService>();
+            kernel.Bind<IDoctorService>().To<DoctorService>();
+            kernel.Bind<IPatientservice>().To<PatientService>();
+            kernel.Bind<ISpecialityService>().To<SpecialityService>();
+        }
+
+        private static T GetOwinInjection<T>(IContext context) where T : class
+        {
+            var contextBase = new HttpContextWrapper(HttpContext.Current);
+            return contextBase.GetOwinContext().Get<T>();
         }
     }
 }
