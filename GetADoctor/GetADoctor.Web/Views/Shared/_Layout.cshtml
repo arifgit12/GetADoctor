@@ -21,9 +21,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.Partial("_AdminPartial")
+                        @Html.Partial("_DoctorPartial")
+                        @Html.Partial("_PatientPartial")
+                        <li>@Html.ActionLink("Manage Account", "Index", "Manage", new { Area = "" }, new { })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Home", new { Area = "" }, new { })</li>
+                        <li>@Html.ActionLink("About", "About", "Home", new { Area = "" }, new { })</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home", new { Area = "" }, new { })</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

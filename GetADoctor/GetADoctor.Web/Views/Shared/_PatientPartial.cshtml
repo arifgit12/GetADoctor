@@ -1,0 +1,8 @@
+﻿@using GetADoctor.Models
+
+@if (User.IsInRole(UserRoles.Patient.ToString()))
+{
+    <li>@Html.ActionLink("Home", "Index", "Home", new { Area = "" }, new { })</li>
+    <li>@Html.ActionLink("Doctors", "Index", "Patient", new { Area = "" }, new { })</li>
+    <li>@Html.ActionLink("Appointments", "Appointments", "Patient", new { Area = "" }, new { })</li>
+}

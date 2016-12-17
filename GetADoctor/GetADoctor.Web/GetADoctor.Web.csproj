@@ -290,6 +290,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_AdminPartial.cshtml" />
+    <Content Include="Views\Shared\_DoctorPartial.cshtml" />
+    <Content Include="Views\Shared\_PatientPartial.cshtml" />
+    <Content Include="Views\Account\RegisterAsDoctor.cshtml" />
+    <Content Include="Views\Account\RegisterAsPatient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
