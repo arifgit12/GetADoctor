@@ -10,13 +10,21 @@ namespace GetADoctor.Data.Repositories
 {
     public class DoctorRepository : Repository<Doctor>, IDoctorRepository
     {
-        public DoctorRepository(ApplicationDbContext context) : base(context)
+        private ApplicationDbContext _databaseContext;
+        public DoctorRepository(ApplicationDbContext context)
+            : base(context)
         {
+            this._databaseContext = context;
+        }
+
+        public Doctor GetByUser(string id)
+        {
+            return _databaseContext.Doctors.FirstOrDefault(u => u.UserId == id);
         }
     }
 
     public interface IDoctorRepository : IRepository<Doctor>
     {
-
+        Doctor GetByUser(string id);
     }
 }

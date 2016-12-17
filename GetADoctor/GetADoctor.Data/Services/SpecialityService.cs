@@ -17,6 +17,12 @@ namespace GetADoctor.Data.Services
     public class SpecialityService : ISpecialityService
     {
         private readonly ISpecialityRepository _specialityRepo;
+
+        public SpecialityService(ISpecialityRepository specialityRepository)
+        {
+            this._specialityRepo = specialityRepository;
+        }
+
         public IEnumerable<Speciality> GetSpecialities()
         {
             return this._specialityRepo.GetAll();

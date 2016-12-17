@@ -29,7 +29,7 @@ namespace GetADoctor.Models
         public String Gender { get; set; }
         public String MobileNumber { get; set; }
         public String ImageUrl { get; set; }
-        public int SpecialityId { get; set; }
+        public int? SpecialityId { get; set; }
         public virtual Speciality Speciality { get; set; }
 
         [ForeignKey("User")]
