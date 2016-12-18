@@ -21,7 +21,7 @@ namespace GetADoctor.Web.Areas.Admin.Controllers
         // GET: Admin/States
         public ActionResult Index()
         {
-            var states = stateService.GetStates();
+            var states = AutoMapper.Mapper.Map<IEnumerable<StateViewModel>>(stateService.GetStates());
             return View(states);
         }
 
@@ -39,24 +39,32 @@ namespace GetADoctor.Web.Areas.Admin.Controllers
 
         // POST: Admin/States/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(StateViewModel model)
         {
             try
             {
                 // TODO: Add insert logic here
-                State state = new State();
-                state.StateName = "WestBengal";
-                state.CreatedOn = DateTime.Now;
-                state.UpdatedOn = DateTime.Now;
+                if (ModelState.IsValid)
+                {
+                    var state = AutoMapper.Mapper.Map<State>(model);
 
-                var isSave = stateService.SaveState(state);
-                
-                return RedirectToAction("Index");
+                    state.CreatedOn = DateTime.Now;
+                    state.UpdatedOn = DateTime.Now;
+
+                    var isSave = stateService.SaveState(state);
+
+                    if(isSave > 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
             }
             catch
             {
-                return View();
+                return View(model);
             }
+            return View(model);
         }
 
         // GET: Admin/States/Edit/5

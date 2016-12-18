@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<GetADoctor.Web.Areas.Admin.Models.StateViewModel>
 @{
     ViewBag.Title = "Index";
 }
@@ -6,7 +6,33 @@
 <div class="row">
     <div class="top-bottom-padding">
         <h2>List of States</h2>
-        <hr />
+        <p>
+            @Html.ActionLink("Add State", "Create")
+        </p>
+        <hr />        
     </div>
+</div>
+<div class="row">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.StateName)</th>
+            <th>@Html.DisplayNameFor(model => model.CreatedOn)</th>
+            <th>@Html.DisplayNameFor(model => model.UpdatedOn)</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.StateName)</td>
+                <td>@Html.DisplayFor(modelItem => item.CreatedOn)</td>
+                <td>@Html.DisplayFor(modelItem => item.UpdatedOn)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
 </div>
 
