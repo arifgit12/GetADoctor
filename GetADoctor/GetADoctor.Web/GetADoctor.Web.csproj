@@ -299,6 +299,7 @@
     <Content Include="Views\Account\RegisterAsDoctor.cshtml" />
     <Content Include="Views\Account\RegisterAsPatient.cshtml" />
     <Content Include="Views\Doctor\Index.cshtml" />
+    <Content Include="Views\Doctor\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

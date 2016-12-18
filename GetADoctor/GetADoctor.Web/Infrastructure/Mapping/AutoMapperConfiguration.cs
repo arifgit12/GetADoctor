@@ -1,5 +1,6 @@
 ﻿using GetADoctor.Models;
 using GetADoctor.Web.Areas.Admin.Models;
+using GetADoctor.Web.Models;
 using System;
 
 namespace GetADoctor.Web.Infrastructure.Mapping
@@ -16,6 +17,8 @@ namespace GetADoctor.Web.Infrastructure.Mapping
                 config.CreateMap<CityViewModel, City>();
                 config.CreateMap<City, CityViewModel>();
 
+                config.CreateMap<DoctorViewModel, Doctor>();
+                config.CreateMap<Doctor, DoctorViewModel>();
 
             });
         }

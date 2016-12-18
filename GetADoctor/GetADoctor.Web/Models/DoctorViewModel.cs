@@ -26,12 +26,18 @@ namespace GetADoctor.Web.Models
         public int Age { get; set; }
 
         [Required]
-        [Display(Name = "")]
+        [Display(Name = "Gender")]
         public String Gender { get; set; }
 
         [Required]
         [RegularExpression(@"^\d{10}$", ErrorMessage = "Entered phone number is not valid.")]
         public String MobileNumber { get; set; }
+
+        public String ImageUrl { get; set; }
+
+        [Display(Name = "Specialization")]
+        public int? SpecialityId { get; set; }
+        public virtual Speciality Speciality { get; set; }
 
         public String HouseNo { get; set; }
         public String RoadNo { get; set; }
@@ -39,12 +45,5 @@ namespace GetADoctor.Web.Models
         
         public String City { get; set; }
         public String State { get; set; }
-        
-
-        public String ImageUrl { get; set; }
-
-        [Display(Name = "Specialization")]
-        public int? SpecialityId { get; set; }
-        public virtual Speciality Speciality { get; set; }
     }
 }
