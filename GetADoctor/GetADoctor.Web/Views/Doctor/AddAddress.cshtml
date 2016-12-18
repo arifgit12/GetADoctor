@@ -1,0 +1,75 @@
+﻿@model GetADoctor.Web.Models.AddressViewModel
+@{
+    ViewBag.Title = "Add Address";
+}
+
+<div class="row">
+    <div class="col-md-6 top-bottom-padding center">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+        @if (TempData["Error"] != null)
+        {
+            <strong>Note: </strong>
+            @TempData["Error"].ToString()
+        }
+        else
+        {
+            <div class="well">
+                @using (Html.BeginForm("AddAddress", "Doctor", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.Label("State", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div id="StateContainer" class="col-md-9">
+                            @Html.Action("StateView")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("City", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div id="CityContainer" class="col-md-9">
+                            @Html.Action("CityView")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Latitude, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Longitude, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Zipcode, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.Zipcode, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Zipcode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-9">
+                            <input type="submit" value="Submit" class="btn btn-success" />
+                            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-warning" })
+                        </div>
+                    </div>
+                }
+            </div>
+        }        
+    </div>
+</div>

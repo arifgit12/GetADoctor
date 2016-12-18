@@ -9,6 +9,8 @@ namespace GetADoctor.Web.Models
 {
     public class DoctorViewModel
     {
+        public int DoctorId { get; set; }
+
         [Required]
         [Display(Name = "First Name")]
         public String FirstName { get; set; }

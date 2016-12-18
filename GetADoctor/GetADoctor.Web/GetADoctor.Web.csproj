@@ -205,9 +205,12 @@
     </Compile>
     <Compile Include="Infrastructure\Mapping\AutoMapperConfiguration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddressViewModel.cs" />
+    <Compile Include="Models\CityListViewModel.cs" />
     <Compile Include="Models\DoctorViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\StateListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -300,6 +303,10 @@
     <Content Include="Views\Account\RegisterAsPatient.cshtml" />
     <Content Include="Views\Doctor\Index.cshtml" />
     <Content Include="Views\Doctor\EditProfile.cshtml" />
+    <Content Include="Views\Doctor\AddAddress.cshtml" />
+    <Content Include="Views\Doctor\StateView.cshtml" />
+    <Content Include="Views\Doctor\CityView.cshtml" />
+    <Content Include="Views\Doctor\EditAddress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -24,11 +24,12 @@ namespace GetADoctor.Models
         public string UIN { get; set; }
         public String FirstName { get; set; }
         public String LastName { get; set; }
-        public String Specialization { get; set; }
         public int Age { get; set; }
         public String Gender { get; set; }
         public String MobileNumber { get; set; }
         public String ImageUrl { get; set; }
+
+        [ForeignKey("Speciality")]
         public int? SpecialityId { get; set; }
         public virtual Speciality Speciality { get; set; }
 

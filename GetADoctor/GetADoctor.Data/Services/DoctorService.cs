@@ -19,11 +19,14 @@ namespace GetADoctor.Data.Services
         int SaveDoctor(Doctor doctor);
         int UpdateDoctor(Doctor doctor);
 
-        //Location GetAddressByUserId(string userId);
-        //Location GetAddress(int id);
-        //int SaveAddress(Location address, string userId);
-        //int UpdateAddress(Location address, string userId);
-        //object GetDoctorUserId(Task<string> task);
+        Location GetAddressByUserId(string userId);
+        Location GetAddress(int id);
+        int SaveAddress(Location address);
+        int UpdateAddress(Location address);
+
+        // Get All States
+        IEnumerable<State> GetStates();
+        State GetState(int id);
 
         //IEnumerable<Schedule> GetAllScheduleByUserId(string userId);
         //Schedule GetScheduleByUserId(String userId);
@@ -37,16 +40,20 @@ namespace GetADoctor.Data.Services
     public class DoctorService : IDoctorService
     {
         private readonly IDoctorRepository _doctorRepository;
-        //private readonly ILocationRepository _addressRepository;
+        private readonly ILocationRepository _addressRepository;
         //private readonly IScheduleRepository _scheduleRepository;
         //private readonly IAppointmentRepository _appointmentRepository;
         //private readonly IWaitingRepository _waitingRepository;
         private readonly ISpecialityRepository _specialityRepository;
+        private readonly IStateRepository _stateRepository;
 
-        public DoctorService(IDoctorRepository doctorRepository, ISpecialityRepository specialityRepository)
+        public DoctorService(IDoctorRepository doctorRepository, ISpecialityRepository specialityRepository, 
+            ILocationRepository addressRepository, IStateRepository stateRepository)
         {
             _doctorRepository = doctorRepository;
             _specialityRepository = specialityRepository;
+            _addressRepository = addressRepository;
+            _stateRepository = stateRepository;
         }
 
         public Doctor GetDoctor(int id)
@@ -84,6 +91,38 @@ namespace GetADoctor.Data.Services
         public IEnumerable<Speciality> GetSpecialities()
         {
             return this._specialityRepository.GetAll();
+        }
+
+        public Location GetAddressByUserId(string userId)
+        {
+            return this._addressRepository.SearchFor(s => s.UserId == userId).FirstOrDefault();
+        }
+
+        public Location GetAddress(int id)
+        {
+            return this._addressRepository.Get(id);
+        }
+
+        public int SaveAddress(Location address)
+        {
+            this._addressRepository.Add(address);
+            return this._addressRepository.SaveChanges();
+        }
+
+        public int UpdateAddress(Location address)
+        {
+            this._addressRepository.Update(address);
+            return this._addressRepository.SaveChanges();
+        }
+
+        public IEnumerable<State> GetStates()
+        {
+            return this._stateRepository.GetAll();
+        }
+
+        public State GetState(int id)
+        {
+            return this._stateRepository.Get(id);
         }
     }
 }

@@ -11,6 +11,7 @@
             @Html.AntiForgeryToken()
 
             @Html.ValidationSummary("", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.DoctorId)
 
             if (Session["Success"] != null)
             {

@@ -1,5 +1,7 @@
-﻿using GetADoctor.Data.Services;
+﻿using AutoMapper;
+using GetADoctor.Data.Services;
 using GetADoctor.Models;
+using GetADoctor.Web.Areas.Admin.Models;
 using GetADoctor.Web.Models;
 using Microsoft.AspNet.Identity.Owin;
 using System;
@@ -35,7 +37,7 @@ namespace GetADoctor.Web.Areas
             string userId = await GetUserId();
             var doctor = _doctorService.GetDoctorByUserId(userId);
             var model = AutoMapper.Mapper.Map<DoctorViewModel>(doctor);
-            ViewBag.SpecialityId = new SelectList(this._doctorService.GetSpecialities(), "Id", "Name");
+            ViewBag.SpecialityId = new SelectList(this._doctorService.GetSpecialities(), "Id", "Name", doctor.SpecialityId);
 
             return View(model);
         }
@@ -46,12 +48,11 @@ namespace GetADoctor.Web.Areas
         {
             if (ModelState.IsValid)
             {
-                string userId = await GetUserId();
-                var doctordb = _doctorService.GetDoctorByUserId(userId);
-                var doctor = AutoMapper.Mapper.Map<Doctor>(model);
-                doctor.UserId = doctordb.UserId;
+                var user = await GetUser();
+                var doctordb = _doctorService.GetDoctorByUserId(user.Id);
+                Mapper.Map(model, doctordb);
                 
-                var isUpdated = _doctorService.UpdateDoctor(doctor);
+                var isUpdated = _doctorService.UpdateDoctor(doctordb);
                 if(isUpdated > 0)
                 {
                     return RedirectToAction("Index", "Doctor");
@@ -62,13 +63,117 @@ namespace GetADoctor.Web.Areas
             return View(model);
         }
 
-        [NonAction]
-        public virtual async System.Threading.Tasks.Task<string> GetUserId()
+        public async Task<ActionResult> AddAddress()
         {
-            string userName = this.User.Identity.Name;
-            var user = await UserManager.FindByNameAsync(userName);
-            return user.Id;
+            var userId = await GetUserId();
+            var address = _doctorService.GetAddressByUserId(userId);
+            if(address != null)
+            {
+                TempData["Error"] = "Address Already Present";
+            }
+
+            return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddAddress(AddressViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = await GetUserId();
+                if(_doctorService.GetAddressByUserId(userId) == null)
+                {
+                    var address = new Location();
+                    address.UserId = userId;
+                    address.CreatedOn = DateTime.UtcNow;
+                    address.UpdatedOn = DateTime.UtcNow;
+
+                    Mapper.Map(model, address);
+
+                    var isSave = _doctorService.SaveAddress(address);
+                    if (isSave > 0)
+                    {
+                        return RedirectToAction("Index", "Doctor");
+                    }
+                }
+                
+            }
+            
+            return View(model);
+        }
+
+        public async Task<ActionResult> EditAddress()
+        {
+            var userId = await GetUserId();
+            var address = _doctorService.GetAddressByUserId(userId);
+            if (address == null)
+            {
+                TempData["Error"] = "No Address Found";
+                return View();
+            }
+
+            var model = Mapper.Map<AddressViewModel>(address);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditAddress(AddressViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = await GetUserId();
+                var address = _doctorService.GetAddressByUserId(userId);
+                if (address == null)
+                {
+                    TempData["Error"] = "No Address Found";
+                }
+                else
+                {
+                    address = Mapper.Map(model, address);
+                    address.UpdatedOn = DateTime.UtcNow;
+
+                    var isSave = _doctorService.UpdateAddress(address);
+                    if (isSave > 0)
+                    {
+                        return RedirectToAction("Index", "Doctor");
+                    }
+                }
+
+            }
+
+            return View(model);
+        }
+
+        public static StateListViewModel slvm = new StateListViewModel();
+        public ActionResult StateView()
+        {
+            slvm.StateList.Clear();
+            var states = _doctorService.GetStates();
+            foreach(State state in states)
+            {
+                slvm.StateList.Add(state);
+            }
+
+            return View(slvm);
+        }
+
+        public static GetADoctor.Web.Models.CityListViewModel clvm = new CityListViewModel();
+        public ActionResult CityView(int? stateId)
+        {
+            clvm.CityList.Clear();
+            if (stateId != null)
+            {
+                var states = _doctorService.GetState(stateId.Value);
+
+                foreach (City cpd in states.Cities)
+                {
+                    clvm.CityList.Add(cpd);
+                }
+            }
+            return View(clvm);
+        }
     }
 }

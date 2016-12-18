@@ -1,0 +1,17 @@
+﻿@model GetADoctor.Web.Models.StateListViewModel
+@{ 
+    Layout = null;
+}
+
+@Html.DropDownListFor( s => s.Id, Model.StateEnum, "Select a State", new { @id = "State-DropDownID", @class = "form-control" })
+
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#State-DropDownID').change(function () {
+            console.log("Drop down clicked");
+            var selectedStateId = this.value;
+            $('#CityContainer').load('@Url.Action("CityView")?stateId=' + selectedStateId);
+        });
+    });
+</script>
