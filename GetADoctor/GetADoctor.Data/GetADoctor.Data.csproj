@@ -77,7 +77,9 @@
     <Compile Include="Repositories\WaitingRepository.cs" />
     <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\DoctorService.cs" />
+    <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\PatientService.cs" />
+    <Compile Include="Services\ProfileService.cs" />
     <Compile Include="Services\SpecialityService.cs" />
     <Compile Include="Services\StateService.cs" />
   </ItemGroup>
