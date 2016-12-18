@@ -225,6 +225,7 @@
     <Compile Include="Models\DoctorViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PatientViewModel.cs" />
     <Compile Include="Models\StateListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -327,6 +328,12 @@
     <Content Include="Views\Doctor\StateView.cshtml" />
     <Content Include="Views\Doctor\CityView.cshtml" />
     <Content Include="Views\Doctor\EditAddress.cshtml" />
+    <Content Include="Views\Manage\AddAddress.cshtml" />
+    <Content Include="Views\Manage\EditAddress.cshtml" />
+    <Content Include="Views\Manage\CityView.cshtml" />
+    <Content Include="Views\Manage\StateView.cshtml" />
+    <Content Include="Views\Manage\DoctorProfile.cshtml" />
+    <Content Include="Views\Manage\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

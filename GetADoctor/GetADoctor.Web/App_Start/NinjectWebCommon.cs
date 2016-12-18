@@ -90,6 +90,8 @@ namespace GetADoctor.Web.App_Start
             kernel.Bind<IDoctorService>().To<DoctorService>();
             kernel.Bind<IPatientservice>().To<PatientService>();
             kernel.Bind<ISpecialityService>().To<SpecialityService>();
+            kernel.Bind<ILocationservice>().To<LocationService>();
+            kernel.Bind<IProfileService>().To<ProfileService>();
         }
 
         private static T GetOwinInjection<T>(IContext context) where T : class

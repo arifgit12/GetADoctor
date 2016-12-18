@@ -7,6 +7,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GetADoctor.Web.Models;
+using GetADoctor.Data.Services;
+using GetADoctor.Models;
+using AutoMapper;
 
 namespace GetADoctor.Web.Areas
 {
@@ -15,15 +18,20 @@ namespace GetADoctor.Web.Areas
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ILocationservice _locationService;
+        private IProfileService _profileService;
 
-        public ManageController()
-        {
-        }
+        //public ManageController()
+        //{
+        //}
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager,
+            ILocationservice locationService, IProfileService profileService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            this._locationService = locationService;
+            this._profileService = profileService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -61,6 +69,8 @@ namespace GetADoctor.Web.Areas
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.AddressAddSuccess ? "Your Address Added Successfully"
+                : message == ManageMessageId.AddressUpdateSuccess ? "Your Address Updated Successfully"
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -70,7 +80,8 @@ namespace GetADoctor.Web.Areas
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                HasAddress = _locationService.GetAddressByUserId(userId) != null ? true : false
             };
             return View(model);
         }
@@ -130,6 +141,189 @@ namespace GetADoctor.Web.Areas
             return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
         }
 
+        /**********************DOCTOR PROFILE***********************************************************/
+
+        // GET: Manage/DoctorProfile
+        public async Task<ActionResult> DoctorProfile()
+        {
+            string userId = await GetUserId();
+            var doctor = _profileService.GetDoctorByUserId(userId);
+            var model = AutoMapper.Mapper.Map<DoctorViewModel>(doctor);
+            ViewBag.SpecialityId = new SelectList(this._profileService.GetSpecialities(), "Id", "Name", doctor.SpecialityId);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DoctorProfile(DoctorViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string userId = await GetUserId();
+                var doctordb = _profileService.GetDoctorByUserId(userId);
+                Mapper.Map(model, doctordb);
+
+                var isUpdated = _profileService.UpdateDoctor(doctordb);
+                if (isUpdated > 0)
+                {
+                    return RedirectToAction("Index", "Manage");
+                }
+
+            }
+
+            return View(model);
+        }
+
+        /**************************PATIENT PROFILE********************************************/
+
+        // GET: Manage/UserProfile
+        public async Task<ActionResult> UserProfile()
+        {
+            string userId = await GetUserId();
+            var patient = _profileService.GetPatientByUserId(userId);
+            var model = Mapper.Map<PatientViewModel>(patient);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UserProfile(PatientViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string userId = await GetUserId();
+                var patient = _profileService.GetPatientByUserId(userId);
+                Mapper.Map(model, patient);
+
+                var isUpdated = _profileService.UpdatePatient(patient);
+                if (isUpdated > 0)
+                {
+                    return RedirectToAction("Index", "Manage");
+                }
+            }
+            return View();
+        }
+
+        /**************************BEGIN ADDRESS**********************************************/
+
+        [HttpGet]
+        public async Task<ActionResult> AddAddress()
+        {
+            var userId = await GetUserId();
+            var address = _locationService.GetAddressByUserId(userId);
+            if (address != null)
+            {
+                TempData["Error"] = "Address Already Present";
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddAddress(AddressViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = await GetUserId();
+                if (_locationService.GetAddressByUserId(userId) == null)
+                {
+                    var address = new Location();
+                    Mapper.Map(model, address);
+
+                    address.UserId = userId;
+                    address.CreatedOn = DateTime.UtcNow;
+                    address.UpdatedOn = DateTime.UtcNow;                    
+
+                    var isSave = _locationService.SaveAddress(address);
+                    if (isSave > 0)
+                    {
+                        return RedirectToAction("Index", "Manage");
+                    }
+                }
+
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> EditAddress()
+        {
+            var userId = await GetUserId();
+            var address = _locationService.GetAddressByUserId(userId);
+            if (address == null)
+            {
+                TempData["Error"] = "No Address Found";
+                return View();
+            }
+
+            var model = Mapper.Map<AddressViewModel>(address);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditAddress(AddressViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = await GetUserId();
+                var address = _locationService.GetAddressByUserId(userId);
+                if (address == null)
+                {
+                    TempData["Error"] = "No Address Found";
+                }
+                else
+                {
+                    address = Mapper.Map(model, address);
+                    address.UpdatedOn = DateTime.UtcNow;
+
+                    var isSave = _locationService.UpdateAddress(address);
+                    if (isSave > 0)
+                    {
+                        return RedirectToAction("Index", "Manage");
+                    }
+                }
+
+            }
+
+            return View(model);
+        }
+
+        public static StateListViewModel slvm = new StateListViewModel();
+        public ActionResult StateView()
+        {
+            slvm.StateList.Clear();
+            var states = _locationService.GetStates();
+            foreach (State state in states)
+            {
+                slvm.StateList.Add(state);
+            }
+
+            return View(slvm);
+        }
+
+        public static CityListViewModel clvm = new CityListViewModel();
+        public ActionResult CityView(int? stateId)
+        {
+            clvm.CityList.Clear();
+            if (stateId != null)
+            {
+                var states = _locationService.GetState(stateId.Value);
+
+                foreach (City cpd in states.Cities)
+                {
+                    clvm.CityList.Add(cpd);
+                }
+            }
+            return View(clvm);
+        }
+
+        /**************************END ADDRESS**********************************************/
         //
         // POST: /Manage/EnableTwoFactorAuthentication
         [HttpPost]
@@ -331,7 +525,15 @@ namespace GetADoctor.Web.Areas
             base.Dispose(disposing);
         }
 
-#region Helpers
+        [NonAction]
+        public async Task<string> GetUserId()
+        {
+            string userName = this.User.Identity.Name;
+            var user = await UserManager.FindByNameAsync(userName);
+            return user.Id;
+        }
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -342,7 +544,7 @@ namespace GetADoctor.Web.Areas
                 return HttpContext.GetOwinContext().Authentication;
             }
         }
-
+        
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -379,6 +581,8 @@ namespace GetADoctor.Web.Areas
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
+            AddressAddSuccess,
+            AddressUpdateSuccess,
             Error
         }
 
