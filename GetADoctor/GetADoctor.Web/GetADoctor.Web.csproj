@@ -215,6 +215,7 @@
     <Compile Include="Areas\DoctorController.cs" />
     <Compile Include="Areas\HomeController.cs" />
     <Compile Include="Areas\ManageController.cs" />
+    <Compile Include="Areas\PatientController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -334,6 +335,9 @@
     <Content Include="Views\Manage\StateView.cshtml" />
     <Content Include="Views\Manage\DoctorProfile.cshtml" />
     <Content Include="Views\Manage\UserProfile.cshtml" />
+    <Content Include="Views\Patient\Index.cshtml" />
+    <Content Include="Views\Patient\Appointments.cshtml" />
+    <Content Include="Views\Patient\Appointment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
