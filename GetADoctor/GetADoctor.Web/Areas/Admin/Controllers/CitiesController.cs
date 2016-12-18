@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace GetADoctor.Web.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     public class CitiesController : Controller
     {
         private readonly ICityService cityservice;
