@@ -1,3 +1,2 @@
-src/main/resources/static/* linguist-vendored
-project-docs/* linguist-documentation
+GetADoctor/* linguist-documentation
 *.cs linguist-language=C#
