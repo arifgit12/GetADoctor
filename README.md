@@ -1,5 +1,4 @@
-# GetADoctor v1.0
-Find and Book doctor
+# GetADoctor v1.0 Find and Book doctor
 ================
 GetADoctor is a web app for doctor and patient. The primary objective of the GetADoctor app is to provide a learning app for building real-world web apps with ASP.NET MVC 5 and EF 6 Code First.
 
@@ -24,8 +23,6 @@ Running the Application
 6. Register as doctor or patient.
 7. Doctor can schedule appointment and view appointment.
 8. User or patient can take and manage appointment.
-
-Please note that we have tested the app in Chrome browser. We have observed that a JavaScript Chart compoment is having browser compatibility issues with some versions of IE.
  
 ## Team
 
