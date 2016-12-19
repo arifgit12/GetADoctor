@@ -26,15 +26,15 @@ namespace GetADoctor.Data.Migrations
                 }
             }
 
-            if (!context.Users.Any(u => u.UserName == "arifali.mondal@gmail.com"))
+            if (!context.Users.Any(u => u.UserName == "admin@admin.com"))
             {
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
                 var user = new ApplicationUser
                 {
-                    UserName = "arifali.mondal@gmail.com",
-                    Email = "arifali.mondal@gmail.com",
-                    PhoneNumber = "0538557493"
+                    UserName = "admin@admin.com",
+                    Email = "admin@admin.com",
+                    PhoneNumber = "9518557397"
                 };
 
                 manager.Create(user, "Admin@123");
