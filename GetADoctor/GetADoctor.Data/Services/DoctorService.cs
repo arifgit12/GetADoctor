@@ -29,9 +29,10 @@ namespace GetADoctor.Data.Services
         State GetState(int id);
 
         IEnumerable<Schedule> GetAllScheduleByUserId(string userId);
+        IEnumerable<Schedule> GetSchedulesByDoctorId(int id);
         //Schedule GetScheduleByUserId(String userId);
         Schedule GetScheduleById(int id);
-        Schedule GetSchedulesByDoctorId(int id);
+        //Schedule GetSchedulesByDoctorId(int id);
         int SaveSchedule(Schedule model);
         int UpdateSchedule(Schedule model);
 
@@ -138,9 +139,9 @@ namespace GetADoctor.Data.Services
             return this._scheduleRepository.Get(id);
         }
 
-        public Schedule GetSchedulesByDoctorId(int id)
+        public IEnumerable<Schedule> GetSchedulesByDoctorId(int id)
         {
-            throw new NotImplementedException();
+            return this._scheduleRepository.SearchFor(d => d.DoctorId == id);
         }
 
         public int SaveSchedule(Schedule model)
