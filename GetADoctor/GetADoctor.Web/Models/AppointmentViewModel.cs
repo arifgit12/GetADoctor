@@ -11,7 +11,6 @@ namespace GetADoctor.Web.Models
     public class AppointmentViewModel
     {
         public int AppointmentId { get; set; }
-        public int PatientId { get; set; }
 
         [Display(Name = "Taken At")]
         public DateTime CreatedOn { get; set; }
@@ -19,9 +18,11 @@ namespace GetADoctor.Web.Models
         [Display(Name = "Updated At")]
         public DateTime UpdatedOn { get; set; }
 
+        [Required]
         [Display(Name = "Visiting Time")]
         public String VisitingTime { get; set; }
 
+        [Required]
         [Display(Name = "Booking Date")]
         public String Date { get; set; }
 
@@ -34,6 +35,10 @@ namespace GetADoctor.Web.Models
         [Display(Name = "Doctor")]
         public int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
+
+        [Display(Name = "Patient")]
+        public int PatientId { get; set; }
+        public virtual Patient Patient { get; set; }
 
         public IEnumerable<SelectListItem> ScheduleDates { get; set; }
     }

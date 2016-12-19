@@ -432,6 +432,7 @@
     <Content Include="Views\Doctor\Schedules.cshtml" />
     <Content Include="Views\Doctor\EditSchedule.cshtml" />
     <Content Include="Views\Patient\CancelAppointment.cshtml" />
+    <Content Include="Views\Doctor\Appointments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -37,25 +37,27 @@ namespace GetADoctor.Data.Services
         int UpdateSchedule(Schedule model);
 
         IEnumerable<Speciality> GetSpecialities();
+        IEnumerable<Appointment> GetAppointmentsByDoctorId(int Id);
     }
     public class DoctorService : IDoctorService
     {
         private readonly IDoctorRepository _doctorRepository;
         private readonly ILocationRepository _addressRepository;
         private readonly IScheduleRepository _scheduleRepository;
-        //private readonly IAppointmentRepository _appointmentRepository;
+        private readonly IAppointmentRepository _appointmentRepository;
         //private readonly IWaitingRepository _waitingRepository;
         private readonly ISpecialityRepository _specialityRepository;
         private readonly IStateRepository _stateRepository;
 
         public DoctorService(IDoctorRepository doctorRepository, ISpecialityRepository specialityRepository, 
-            ILocationRepository addressRepository, IStateRepository stateRepository, IScheduleRepository scheduleRepository)
+            ILocationRepository addressRepository, IStateRepository stateRepository, IScheduleRepository scheduleRepository, IAppointmentRepository appointmentRepository)
         {
             _doctorRepository = doctorRepository;
             _specialityRepository = specialityRepository;
             _addressRepository = addressRepository;
             _stateRepository = stateRepository;
             _scheduleRepository = scheduleRepository;
+            _appointmentRepository = appointmentRepository;
         }
 
         public Doctor GetDoctor(int id)
@@ -154,6 +156,11 @@ namespace GetADoctor.Data.Services
         {
             this._scheduleRepository.Update(model);
             return this._scheduleRepository.SaveChanges();
+        }
+
+        public IEnumerable<Appointment> GetAppointmentsByDoctorId(int Id)
+        {
+            return this._appointmentRepository.SearchFor(d => d.DoctorId == Id).ToList();
         }
     }
 }

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<GetADoctor.Web.Models.AppointmentViewModel>
+@{
+    ViewBag.Title = "Appointments";
+}
+<div class="row">
+    <div class="top-bottom-padding">
+        <h2>List Appointments</h2>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Date)</th>
+            <th>@Html.DisplayNameFor(model => model.CreatedOn)</th>
+            <th>@Html.DisplayNameFor(model => model.Patient.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Serial)</th>
+            <th>@Html.DisplayNameFor(model => model.Doctor.Speciality.Name)</th>
+        </tr>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                <td>@Html.DisplayFor(modelItem => item.CreatedOn)</td>
+                <td>@Html.DisplayFor(modelItem => item.Patient.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Serial)</td>
+                <td>@Html.DisplayFor(modelItem => item.Doctor.Speciality.Name)</td>
+            </tr>
+        }
+    </table>
+</div>
+

@@ -32,6 +32,16 @@ namespace GetADoctor.Web.Areas
             return View();
         }
 
+        // GET: Doctor/Appointments
+        public async Task<ActionResult> Appointments()
+        {
+            string userId = await GetUserId();
+            var doctorId = _doctorService.GetDoctorId(userId);
+            var appointments = _doctorService.GetAppointmentsByDoctorId(doctorId);
+            var model = Mapper.Map<IEnumerable<AppointmentViewModel>>(appointments);
+            return View(model);
+        }
+
         public async Task<ActionResult> Schedules()
         {
             string userId = await GetUserId();
