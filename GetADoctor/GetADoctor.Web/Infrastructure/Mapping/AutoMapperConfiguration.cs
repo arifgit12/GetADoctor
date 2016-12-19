@@ -23,6 +23,9 @@ namespace GetADoctor.Web.Infrastructure.Mapping
                 config.CreateMap<DoctorViewModel, Doctor>();
                 config.CreateMap<Doctor, DoctorViewModel>();
 
+                config.CreateMap<PatientViewModel, Patient>();
+                config.CreateMap<Patient, PatientViewModel>();
+
                 config.CreateMap<AddressViewModel, Location>();
                 config.CreateMap<Location, AddressViewModel>();
 

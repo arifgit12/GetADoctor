@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace GetADoctor.Web.Areas
 {
+    [Authorize(Roles = "Doctor")]
     public class DoctorController : BaseController
     {
         private readonly IDoctorService _doctorService;

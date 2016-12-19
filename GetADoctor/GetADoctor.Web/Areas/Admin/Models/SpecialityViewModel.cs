@@ -11,9 +11,9 @@ namespace GetADoctor.Web.Areas.Admin.Models
     {
         public int Id { get; set; }
 
+        [Required]
         [Display(Name = "Code")]
-        [MaxLength(4)]
-        [MinLength(4)]
+        [RegularExpression("[0-9]{4}", ErrorMessage = "Please enter 4 digits number only")]
         public int Code { get; set; }
 
         [Required]

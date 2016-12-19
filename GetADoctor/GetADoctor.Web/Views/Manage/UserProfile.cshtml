@@ -1,0 +1,69 @@
+﻿@model GetADoctor.Web.Models.PatientViewModel
+@using GetADoctor.Models
+@{
+    ViewBag.Title = "UserProfile";
+}
+<div class="row">
+    <div class="top-bottom-padding">
+        <h2>User Profile</h2>
+        <hr />
+    </div>
+</div>
+@if (User.IsInRole(UserRoles.Patient.ToString()))
+{
+    
+    <div class="row">
+        <div class="col-lg-8 center">
+            <div class="well">
+                @using (Html.BeginForm("UserProfile", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.PatientId)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.RadioButtonFor(model => model.Gender, GENDER.MALE.ToString(), new { @checked = true }) Male
+                            @Html.RadioButtonFor(model => model.Gender, GENDER.FEMALE.ToString())
+                            Female
+                            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MobileNumber, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-9 col-lg-offset-3">
+                            <button class="btn btn-success" type="submit">Update</button>
+                            @Html.ActionLink("Cancel", "Index", null, null, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+

@@ -62,11 +62,15 @@ namespace GetADoctor.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                //db.Specialitites.Add(speciality);
-                //db.SaveChanges();
-                return RedirectToAction("Index");
+                var speciality = AutoMapper.Mapper.Map<Speciality>(model);
+                speciality.CreatedOn = DateTime.UtcNow;
+                speciality.UpdatedOn = DateTime.UtcNow;
+                var isSave = this._specialityservice.SaveSpeciality(speciality);
+                if(isSave > 0)
+                {
+                    return RedirectToAction("Index");
+                }
             }
-
             return View(model);
         }
 
@@ -91,15 +95,20 @@ namespace GetADoctor.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Code,Name,CreatedOn,UpdatedOn")] Speciality speciality)
+        public ActionResult Edit(SpecialityViewModel model)
         {
             if (ModelState.IsValid)
             {
-                //db.Entry(speciality).State = EntityState.Modified;
-                //db.SaveChanges();
-                return RedirectToAction("Index");
+                Speciality speciality = this._specialityservice.GetSpeciality(model.Id);
+                speciality = AutoMapper.Mapper.Map(model, speciality);
+                speciality.UpdatedOn = DateTime.UtcNow;
+                var isUpdate = this._specialityservice.UpdateSpeciality(speciality);
+                if(isUpdate > 0)
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            return View(speciality);
+            return View(model);
         }
 
         // GET: Admin/Specialities/Delete/5
@@ -124,8 +133,7 @@ namespace GetADoctor.Web.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Speciality speciality = this._specialityservice.GetSpeciality(id);
-            //db.Specialitites.Remove(speciality);
-            //db.SaveChanges();
+            // Delete speciality - not implemented
             return RedirectToAction("Index");
         }
     }

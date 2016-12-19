@@ -13,6 +13,7 @@ namespace GetADoctor.Data.Services
         IEnumerable<Speciality> GetSpecialities();
         Speciality GetSpeciality(int id);
         int SaveSpeciality(Speciality speciality);
+        int UpdateSpeciality(Speciality speciality);
     }
     public class SpecialityService : ISpecialityService
     {
@@ -36,6 +37,12 @@ namespace GetADoctor.Data.Services
         public int SaveSpeciality(Speciality speciality)
         {
             this._specialityRepo.Add(speciality);
+            return this._specialityRepo.SaveChanges();
+        }
+
+        public int UpdateSpeciality(Speciality speciality)
+        {
+            this._specialityRepo.Update(speciality);
             return this._specialityRepo.SaveChanges();
         }
     }
