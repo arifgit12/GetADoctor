@@ -1,0 +1,100 @@
+﻿@model GetADoctor.Web.Models.ScheduleViewModel
+@{
+    ViewBag.Title = "Schedule";
+}
+<link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
+<div class="row">
+    <div class="top-bottom-padding">
+        <h2>Schedule Appointment</h2>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    @using (Html.BeginForm("Schedule", "Doctor", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+        <div class="form-group col-lg-4">
+            <h3>Dates</h3>
+            <hr />
+            <div>
+                @Html.TextBoxFor(model => model.Dates,
+                        new { @class = "form-control datePicker", type = "text", placeholder = "Enter Schedule Date" })
+                @Html.ValidationMessageFor(model => model.Dates, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <fieldset class="col-lg-6 col-lg-offset-2">
+            <h3>Time</h3>
+            <hr />
+            <div class="form-group form-inline">
+                <label class="col-lg-3 control-label">From</label>
+                <div class="input-group col-lg-4">
+                    <div class="input-group-addon">Hour</div>
+
+                    <input type="number" min="0" class="form-control center" max="23" required="" name="FromHour" value="@Model.FromHour" placeholder="Hour" />
+
+                </div>
+
+                <div class="input-group col-lg-4">
+                    <div class="input-group-addon">Minute</div>
+
+                    <input type="number" min="0" class="form-control center" max="59" required="" name="FromMinute" value="@Model.FromMinute" placeholder="Minute" />
+
+                </div>
+            </div>
+            <div class="form-group form-inline">
+                <label class="col-lg-3 control-label">To</label>
+                <div class="input-group col-lg-4">
+                    <div class="input-group-addon">Hour</div>
+
+                    <input type="number" min="0" class="form-control center" max="23" required="" name="ToHour" value="@Model.ToHour" placeholder="Hour" />
+
+                </div>
+
+                <div class="input-group col-lg-4">
+                    <div class="input-group-addon">Minute</div>
+
+                    <input type="number" min="0" class="form-control center" max="59" required="" name="ToMinute" value="@Model.ToMinute" placeholder="Minute" />
+
+                </div>
+            </div>
+            <h3>Visiting Capacity</h3>
+            <div class="form-group">
+                <label for="inputUserName" class="col-lg-3 control-label">Patients</label>
+                <div class="col-lg-3">
+                    <input value="@Model.PatientNumber" type="number" min="0" class="form-control" required="" name="PatientNumber" placeholder="PatientNumber" />
+                </div>
+            </div>
+            <h3>Fees</h3>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Visiting</label>
+                <div class="col-lg-3">
+                    <input value="@Model.VisitingFee" type="number" min="0" class="form-control" required="" name="VisitingFee" placeholder="Visiting Fee" />
+                </div>
+
+                <label class="col-lg-3 control-label">Registration</label>
+                <div class="col-lg-3">
+                    <input value="@Model.RegistrationFee" type="number" min="0" class="form-control" required="" name="RegistrationFee" placeholder="Registration Fee" />
+                </div>
+            </div>
+        </fieldset>
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-primary col-md-1 pull-right" value="Save" />
+            @Html.ActionLink("Cancel", "Schedules", null, new { @class = "btn btn-warning pull-right", @style = "margin-right:5px;" })
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.datePicker').datetimepicker({
+                format: "DD/MM/YYYY"
+            });
+        });
+    </script>
+}

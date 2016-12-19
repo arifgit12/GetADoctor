@@ -29,6 +29,9 @@ namespace GetADoctor.Web.Infrastructure.Mapping
                 config.CreateMap<AddressViewModel, Location>();
                 config.CreateMap<Location, AddressViewModel>();
 
+                config.CreateMap<ScheduleViewModel, Schedule>();
+                config.CreateMap<Schedule, ScheduleViewModel>();
+
             });
         }
     }

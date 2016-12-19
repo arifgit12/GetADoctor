@@ -1,0 +1,40 @@
+﻿@model IEnumerable<GetADoctor.Web.Models.ScheduleViewModel>
+@{
+    ViewBag.Title = "Schedules";
+}
+
+<div class="row">
+    <div class="top-bottom-padding">
+        <h2>
+            @Html.ActionLink("Add New Schedule", "Schedule", null, new { @class = "btn btn-success pull-right" })
+        </h2>
+        <h2>Schedules</h2>
+        <hr />
+        <table class="table table-bordered">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.Dates)</th>
+                <th>@Html.DisplayNameFor(model => model.FromHour)</th>
+                <th>@Html.DisplayNameFor(model => model.ToHour)</th>
+                <th>@Html.DisplayNameFor(model => model.PatientNumber)</th>
+                <th>@Html.DisplayNameFor(model => model.VisitingFee)</th>
+                <th>@Html.DisplayNameFor(model => model.RegistrationFee)</th>
+                <th>Action</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Dates)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FromHour)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ToHour)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PatientNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.VisitingFee)</td>
+                    <td>@Html.DisplayFor(modelItem => item.RegistrationFee)</td>
+                    <td>@Html.ActionLink("Edit", "EditSchedule", new { id = item.Id })</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
