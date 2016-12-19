@@ -28,12 +28,12 @@ namespace GetADoctor.Data.Services
         IEnumerable<State> GetStates();
         State GetState(int id);
 
-        //IEnumerable<Schedule> GetAllScheduleByUserId(string userId);
+        IEnumerable<Schedule> GetAllScheduleByUserId(string userId);
         //Schedule GetScheduleByUserId(String userId);
-        //Schedule GetScheduleById(int id);
-        //Schedule GetSchedulesByDoctorId(int id);
-        //int SaveSchedule(Schedule model, int DoctorId);
-        //int UpdateSchedule(Schedule model, int DoctorId);
+        Schedule GetScheduleById(int id);
+        Schedule GetSchedulesByDoctorId(int id);
+        int SaveSchedule(Schedule model);
+        int UpdateSchedule(Schedule model);
 
         IEnumerable<Speciality> GetSpecialities();
     }
@@ -41,19 +41,20 @@ namespace GetADoctor.Data.Services
     {
         private readonly IDoctorRepository _doctorRepository;
         private readonly ILocationRepository _addressRepository;
-        //private readonly IScheduleRepository _scheduleRepository;
+        private readonly IScheduleRepository _scheduleRepository;
         //private readonly IAppointmentRepository _appointmentRepository;
         //private readonly IWaitingRepository _waitingRepository;
         private readonly ISpecialityRepository _specialityRepository;
         private readonly IStateRepository _stateRepository;
 
         public DoctorService(IDoctorRepository doctorRepository, ISpecialityRepository specialityRepository, 
-            ILocationRepository addressRepository, IStateRepository stateRepository)
+            ILocationRepository addressRepository, IStateRepository stateRepository, IScheduleRepository scheduleRepository)
         {
             _doctorRepository = doctorRepository;
             _specialityRepository = specialityRepository;
             _addressRepository = addressRepository;
             _stateRepository = stateRepository;
+            _scheduleRepository = scheduleRepository;
         }
 
         public Doctor GetDoctor(int id)
@@ -123,6 +124,35 @@ namespace GetADoctor.Data.Services
         public State GetState(int id)
         {
             return this._stateRepository.Get(id);
+        }
+
+        public IEnumerable<Schedule> GetAllScheduleByUserId(string userId)
+        {
+            var doctorId = _doctorRepository.SearchFor(d => d.UserId == userId).FirstOrDefault().DoctorId;
+            var schedules = _scheduleRepository.SearchFor(d => d.DoctorId == doctorId).ToList();
+            return schedules;
+        }
+
+        public Schedule GetScheduleById(int id)
+        {
+            return this._scheduleRepository.Get(id);
+        }
+
+        public Schedule GetSchedulesByDoctorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int SaveSchedule(Schedule model)
+        {
+            this._scheduleRepository.Add(model);
+            return this._scheduleRepository.SaveChanges();
+        }
+
+        public int UpdateSchedule(Schedule model)
+        {
+            this._scheduleRepository.Update(model);
+            return this._scheduleRepository.SaveChanges();
         }
     }
 }

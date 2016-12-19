@@ -11,7 +11,7 @@ namespace GetADoctor.Data.Services
     public interface IPatientservice
     {
         IEnumerable<Patient> GetPatients();
-        Patient GetPatientUserId(string userId);
+        Patient GetPatientByUserId(string userId);
         Patient GetPatient(int id);
         int GetPatientId(string userId);
         int SavePatient(Patient patient);
@@ -40,7 +40,7 @@ namespace GetADoctor.Data.Services
             return this._patientRepo.SearchFor(u => u.UserId == userId).FirstOrDefault().PatientId;
         }
 
-        public Patient GetPatientUserId(string userId)
+        public Patient GetPatientByUserId(string userId)
         {
             return this._patientRepo.SearchFor(u => u.UserId == userId).FirstOrDefault();
         }
