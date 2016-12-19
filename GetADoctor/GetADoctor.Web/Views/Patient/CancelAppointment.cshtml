@@ -1,0 +1,84 @@
+﻿@model GetADoctor.Web.Models.AppointmentViewModel
+@{
+    ViewBag.Title = "Cancel Appointment";
+}
+
+<div class="row">
+    <div class="top-bottom-padding">
+        <h3>Are you sure you want to cancel the appointment?</h3>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.AppointmentId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AppointmentId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UpdatedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UpdatedOn)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Serial)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Serial)
+            </dd>
+            <dt>
+               Doctor Name
+            </dt>
+
+            <dd>
+                @{ 
+                    var name = Model.Doctor.FirstName + " " + Model.Doctor.LastName;
+                }
+                @name
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Doctor.Speciality.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Doctor.Speciality.Name)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm("Cancel", "Patient", new { Id = Model.AppointmentId }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Cancel" class="btn btn-default" /> |
+                @Html.ActionLink("Back to Appointments", "Appointments")
+            </div>
+        }
+    </div>
+</div>
+

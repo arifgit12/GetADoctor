@@ -222,8 +222,10 @@
     <Compile Include="Infrastructure\Mapping\AutoMapperConfiguration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddressViewModel.cs" />
+    <Compile Include="Models\AppointmentViewModel.cs" />
     <Compile Include="Models\CityListViewModel.cs" />
     <Compile Include="Models\DoctorViewModel.cs" />
+    <Compile Include="Models\HomeDoctorViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PatientViewModel.cs" />
@@ -429,6 +431,7 @@
     <Content Include="Views\Doctor\Schedule.cshtml" />
     <Content Include="Views\Doctor\Schedules.cshtml" />
     <Content Include="Views\Doctor\EditSchedule.cshtml" />
+    <Content Include="Views\Patient\CancelAppointment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

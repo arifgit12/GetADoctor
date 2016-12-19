@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<GetADoctor.Web.Models.AppointmentViewModel>
 @{
     ViewBag.Title = "Appointments";
 }
@@ -7,5 +7,28 @@
         <h2>List Appointments</h2>
         <hr />
     </div>
+</div>
+<div class="row">
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Date)</th>
+            <th>@Html.DisplayNameFor(model => model.CreatedOn)</th>
+            <th>@Html.DisplayNameFor(model => model.Doctor.FirstName)</th>
+            <th>@Html.DisplayNameFor(model => model.Serial)</th>
+            <th>@Html.DisplayNameFor(model => model.Doctor.Speciality.Name)</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                <td>@Html.DisplayFor(modelItem => item.CreatedOn)</td>
+                <td>@Html.DisplayFor(modelItem => item.Doctor.FirstName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Serial)</td>
+                <td>@Html.DisplayFor(modelItem => item.Doctor.Speciality.Name)</td>
+                <td>@Html.ActionLink("Cancel", "CancelAppointment", new { id = item.AppointmentId })</td>
+            </tr>
+        }
+    </table>
 </div>
 

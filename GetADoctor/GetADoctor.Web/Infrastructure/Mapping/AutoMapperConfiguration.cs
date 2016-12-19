@@ -32,6 +32,15 @@ namespace GetADoctor.Web.Infrastructure.Mapping
                 config.CreateMap<ScheduleViewModel, Schedule>();
                 config.CreateMap<Schedule, ScheduleViewModel>();
 
+                config.CreateMap<Doctor, HomeDoctorViewModel>()
+                    .ForMember(d => d.Id,
+                        opt => opt.MapFrom(x => x.DoctorId))
+                    .ForMember(d => d.FullName,
+                        opt => opt.MapFrom(x => x.FirstName + " " + x.LastName));
+
+                config.CreateMap<Appointment, AppointmentViewModel>();
+                config.CreateMap<AppointmentViewModel, Appointment>();
+
             });
         }
     }

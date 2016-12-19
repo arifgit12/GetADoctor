@@ -1,11 +1,86 @@
-﻿
+﻿@model GetADoctor.Web.Models.AppointmentViewModel
 @{
     ViewBag.Title = "Appointment";
 }
+<link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
 <div class="row">
     <div class="top-bottom-padding">
-        <h2>Book Appointment</h2>
+        <h2>Take an Appointment</h2>
         <hr />
     </div>
 </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-8">
+            <div class="well">
+                @using (Html.BeginForm("Appointment", "Patient", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.DoctorId)
 
+                    if (TempData["UnSuccess"] != null)
+                    {
+                        <div class="alert alert-success" id="success-alert2">
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                            <strong>UnSuccess: </strong>
+                            @TempData["UnSuccess"].ToString()
+                        </div>
+                    }
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.VisitingTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.VisitingTime, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.VisitingTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.Date, Model.ScheduleDates, "Select Date", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="BOOK" class="btn btn-success" />
+                            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-warning", @style = "margin-right:5px;" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-4 well">
+            <h4>Doctor Information</h4>
+            <dl class="dl-horizontal">
+                <dt>Doctor Name: </dt>
+                @{
+                    var name = Model.Doctor.FirstName + " " + Model.Doctor.LastName;
+                }
+                <dd>
+                    @name
+                </dd>
+                <dt>Speciality</dt>
+                <dd>@Model.Doctor.Speciality.Name</dd>
+                <dt>Age</dt>
+                <dd>@Model.Doctor.Age</dd>
+                <dt>Gender</dt>
+                <dd>@Model.Doctor.Gender</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.app-datePicker').datetimepicker({
+                format: "DD/MM/YYYY"
+            });
+
+            //$("#success-alert2").delay(1000).fadeOut(1000);
+        });
+    </script>
+}
