@@ -414,11 +414,6 @@
     <Content Include="Views\Account\RegisterAsDoctor.cshtml" />
     <Content Include="Views\Account\RegisterAsPatient.cshtml" />
     <Content Include="Views\Doctor\Index.cshtml" />
-    <Content Include="Views\Doctor\EditProfile.cshtml" />
-    <Content Include="Views\Doctor\AddAddress.cshtml" />
-    <Content Include="Views\Doctor\StateView.cshtml" />
-    <Content Include="Views\Doctor\CityView.cshtml" />
-    <Content Include="Views\Doctor\EditAddress.cshtml" />
     <Content Include="Views\Manage\AddAddress.cshtml" />
     <Content Include="Views\Manage\EditAddress.cshtml" />
     <Content Include="Views\Manage\CityView.cshtml" />
