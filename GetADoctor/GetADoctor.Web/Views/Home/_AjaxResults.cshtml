@@ -1,0 +1,15 @@
+﻿@model IEnumerable<GetADoctor.Web.Models.DoctorSearchViewModel>
+
+@if (Model.Count() == 0)
+{
+    <span class="list-group-item">No results found</span>
+}
+else
+{
+    <div class="list-group">
+        @foreach (var doctor in Model)
+        {
+            @Html.ActionLink(doctor.FullName, "Get", "Doctors", new { id = doctor.Id }, new { @class = "list-group-item" })
+        }
+    </div>
+}

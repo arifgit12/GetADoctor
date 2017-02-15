@@ -1,0 +1,33 @@
+﻿@model IEnumerable<GetADoctor.Web.Models.DoctorSearchViewModel>
+@{
+    ViewBag.Title = "Results";
+    //const string DoctorsGetByIdUrl = "/Doctors/Get/{0}";
+}
+
+<div class="row">
+    <div class="top-bottom-padding">
+        <h2>Searched: @ViewData["searchString"]</h2>
+        <hr />
+        <h4>List of Doctors</h4>
+    </div>
+</div>
+@*<div class="row">
+    @foreach (var doctor in Model)
+    {
+        <div class="col-lg-3">
+            <a href=@string.Format(DoctorsGetByIdUrl, doctor.Id) class="list-group-item">
+                <h5>@doctor.FullName</h5>
+                <p>
+                    <small>
+                        <span>@doctor.Uin</span>
+                        <span>, @doctor.CityName</span>
+                    </small>
+                </p>
+            </a>
+        </div>
+    }
+</div>*@
+<div class="row">
+    @Html.Partial("_AjaxResults")
+</div>
+

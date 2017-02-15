@@ -38,6 +38,10 @@ namespace GetADoctor.Web.Infrastructure.Mapping
                     .ForMember(d => d.FullName,
                         opt => opt.MapFrom(x => x.FirstName + " " + x.LastName));
 
+                config.CreateMap<Doctor, DoctorSearchViewModel>()
+                    .ForMember(d => d.FullName, opt => opt.MapFrom(d => d.FirstName + " " + d.LastName));
+                     //.ForMember(d => d.CityName, opt => opt.MapFrom(d => d.City.Name));
+
                 config.CreateMap<Appointment, AppointmentViewModel>();
                 config.CreateMap<AppointmentViewModel, Appointment>();
 

@@ -224,6 +224,7 @@
     <Compile Include="Models\AddressViewModel.cs" />
     <Compile Include="Models\AppointmentViewModel.cs" />
     <Compile Include="Models\CityListViewModel.cs" />
+    <Compile Include="Models\DoctorSearchViewModel.cs" />
     <Compile Include="Models\DoctorViewModel.cs" />
     <Compile Include="Models\HomeDoctorViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -374,7 +375,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -428,6 +431,8 @@
     <Content Include="Views\Doctor\EditSchedule.cshtml" />
     <Content Include="Views\Patient\CancelAppointment.cshtml" />
     <Content Include="Views\Doctor\Appointments.cshtml" />
+    <Content Include="Views\Home\Results.cshtml" />
+    <Content Include="Views\Home\_AjaxResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -465,9 +470,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>58621</DevelopmentServerPort>
+          <DevelopmentServerPort>56621</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58621/</IISUrl>
+          <IISUrl>http://localhost:56621/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

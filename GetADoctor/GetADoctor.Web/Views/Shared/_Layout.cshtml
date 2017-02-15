@@ -35,6 +35,18 @@
                         <li>@Html.ActionLink("Contact", "Contact", "Home", new { Area = "" }, new { })</li>
                     }
                 </ul>
+                <div class="search">
+                    @using (Html.BeginForm("Results", "Home", FormMethod.Get,
+                        new { @class = "navbar-form navbar-left", role = "search", id = "searchForm" }))
+                    {
+                        <div class="form-group">
+                            <input name="search" id="target" type="text" class="form-control" placeholder="Search by Name" />
+                        </div>
+                        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                        <div id="searchSuggests" class="search-suggest"></div>
+                    }
+                </div>
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
