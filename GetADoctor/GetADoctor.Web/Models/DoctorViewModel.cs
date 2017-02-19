@@ -45,7 +45,7 @@ namespace GetADoctor.Web.Models
         public String RoadNo { get; set; }
 
         
-        public String City { get; set; }
-        public String State { get; set; }
+        public String CityName { get; set; }
+        public String StateName { get; set; }
     }
 }
