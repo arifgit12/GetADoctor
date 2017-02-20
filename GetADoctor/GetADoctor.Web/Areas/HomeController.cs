@@ -1,12 +1,9 @@
-﻿using GetADoctor.Data.Infrastructure;
-using GetADoctor.Data.Services;
+﻿using GetADoctor.Data.Services;
 using GetADoctor.Web.Models;
 using GetADoctor.Web.Models.Home;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GetADoctor.Web.Areas
@@ -19,8 +16,6 @@ namespace GetADoctor.Web.Areas
         {
             this.doctorService = doctorservice;
         }
-
-        //private ApplicationDbContext db = new ApplicationDbContext();
 
         public ActionResult Index()
         {
