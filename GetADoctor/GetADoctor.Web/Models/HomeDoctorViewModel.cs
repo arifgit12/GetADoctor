@@ -12,5 +12,8 @@ namespace GetADoctor.Web.Models
         public string FullName { get; set; }
         public City City { get; set; }
         public Speciality Speciality { get; set; }
+        public float? Rating { get; set; }
+        public int? RatingsCount { get; set; }
+        public int? CommentsCount { get; set; }
     }
 }

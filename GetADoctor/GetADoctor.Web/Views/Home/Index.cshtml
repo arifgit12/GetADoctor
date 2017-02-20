@@ -1,28 +1,20 @@
-﻿@{
+﻿@model GetADoctor.Web.Models.Home.HomeTablesViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
+<div class="row top-bottom-padding">
     <h1>GET A DOCTOR</h1>
     <p class="lead">Web application helps to find a doctor and make an appointment.</p>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            The application is at very intial stage over the time grow to full scale application.
-        </p>
+    <div class="col-md-6">
+        <h3 class="text-center">@Html.DisplayNameFor(model => model.MostCommented)</h3>
+        @Html.Partial("_ListDoctorsPartial", Model.MostCommented)
     </div>
-    <div class="col-md-4">
-        <h2>Technology Used</h2>
-        <p>ASP.NET MVC, EntityFramework, DI, SQL SERVER EXPRESS and Bootstrap.</p>
-    </div>
-    <div class="col-md-4">
-        <h2>Quote</h2>
-        <p>
-            “Life would be much easier if I had the source code.”
-            ― Anonymous
-        </p>
+    <div class="col-md-6">
+        <h3 class="text-center">@Html.DisplayNameFor(model => model.HighestRating)</h3>
+        @Html.Partial("_ListDoctorsPartial", Model.HighestRating)
     </div>
 </div>

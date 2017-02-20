@@ -2,6 +2,7 @@
 using GetADoctor.Web.Areas.Admin.Models;
 using GetADoctor.Web.Models;
 using System;
+using System.Linq;
 
 namespace GetADoctor.Web.Infrastructure.Mapping
 {
@@ -36,7 +37,14 @@ namespace GetADoctor.Web.Infrastructure.Mapping
                     .ForMember(d => d.Id,
                         opt => opt.MapFrom(x => x.DoctorId))
                     .ForMember(d => d.FullName,
-                        opt => opt.MapFrom(x => x.FirstName + " " + x.LastName));
+                        opt => opt.MapFrom(x => x.FirstName + " " + x.LastName))
+                     .ForMember(d => d.Rating,
+                        opt => opt.MapFrom(x => x.Rating.Count > 0
+                        ? (float)x.Rating.Sum(r => r.Value) / x.Rating.Count : 0))
+                    .ForMember(d => d.RatingsCount,
+                        opt => opt.MapFrom(d => d.Rating.Count))
+                    .ForMember(d => d.CommentsCount,
+                        opt => opt.MapFrom(d => d.Comments.Count));
 
                 config.CreateMap<Doctor, DoctorSearchViewModel>()
                     .ForMember(d => d.FullName, opt => opt.MapFrom(d => d.FirstName + " " + d.LastName));
