@@ -1,6 +1,7 @@
 ﻿using GetADoctor.Models;
 using GetADoctor.Web.Areas.Admin.Models;
 using GetADoctor.Web.Models;
+using GetADoctor.Web.Models.Specialities;
 using System;
 using System.Linq;
 
@@ -48,10 +49,21 @@ namespace GetADoctor.Web.Infrastructure.Mapping
 
                 config.CreateMap<Doctor, DoctorSearchViewModel>()
                     .ForMember(d => d.FullName, opt => opt.MapFrom(d => d.FirstName + " " + d.LastName));
-                     //.ForMember(d => d.CityName, opt => opt.MapFrom(d => d.City.Name));
+                //.ForMember(d => d.CityName, opt => opt.MapFrom(d => d.City.Name));
+
+                config.CreateMap<Doctor, SpecialityDoctorViewModel>()
+                    .ForMember(d => d.FullName,
+                        opt => opt.MapFrom(x => x.FirstName + " " + x.LastName))
+                   .ForMember(d => d.Rating,
+                        opt => opt.MapFrom(x => x.Rating.Count > 0
+                            ? (float)x.Rating.Sum(r => r.Value) / x.Rating.Count : 0))
+                   .ForMember(d => d.CommentsCount,
+                        opt => opt.MapFrom(x => x.Comments.Count));
 
                 config.CreateMap<Appointment, AppointmentViewModel>();
                 config.CreateMap<AppointmentViewModel, Appointment>();
+
+                config.CreateMap<Speciality, HomeSpecialityViewModel>();
 
             });
         }
