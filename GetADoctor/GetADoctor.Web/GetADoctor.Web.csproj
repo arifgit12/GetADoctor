@@ -75,6 +75,14 @@
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -216,7 +224,7 @@
     <Compile Include="Areas\HomeController.cs" />
     <Compile Include="Areas\ManageController.cs" />
     <Compile Include="Areas\PatientController.cs" />
-    <Compile Include="Areas\SpecialitiesController.cs" />
+    <Compile Include="Areas\cSpecialitiesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -226,6 +234,7 @@
     <Compile Include="Models\AppointmentViewModel.cs" />
     <Compile Include="Models\CityListViewModel.cs" />
     <Compile Include="Models\DoctorSearchViewModel.cs" />
+    <Compile Include="Models\Doctors\FilterDoctorsViewModel.cs" />
     <Compile Include="Models\DoctorViewModel.cs" />
     <Compile Include="Models\HomeDoctorViewModel.cs" />
     <Compile Include="Models\Home\HomeTablesViewModel.cs" />
@@ -233,6 +242,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PatientViewModel.cs" />
     <Compile Include="Models\ScheduleViewModel.cs" />
+    <Compile Include="Models\Specialities\SpecialityDoctorViewModel.cs" />
+    <Compile Include="Models\Specialities\HomeSpecialityViewModel.cs" />
     <Compile Include="Models\StateListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -246,6 +257,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -438,15 +450,14 @@
     <Content Include="Views\Home\_ListDoctorsPartial.cshtml" />
     <Content Include="Views\Doctor\All.cshtml" />
     <Content Include="Views\Doctor\Get.cshtml" />
-    <Content Include="Views\Specialities\Index.cshtml" />
-    <Content Include="Views\Specialities\All.cshtml" />
-    <Content Include="Views\Specialities\Get.cshtml" />
+    <Content Include="Views\cSpecialities\Index.cshtml" />
+    <Content Include="Views\cSpecialities\All.cshtml" />
+    <Content Include="Views\cSpecialities\Get.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\Cities\" />
-    <Folder Include="Models\Doctors\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

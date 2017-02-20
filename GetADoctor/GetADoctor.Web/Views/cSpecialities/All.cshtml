@@ -1,0 +1,25 @@
+﻿@using PagedList.Mvc
+@model PagedList.PagedList<GetADoctor.Web.Models.Specialities.HomeSpecialityViewModel>
+@{
+    ViewBag.Title = "All";
+}
+
+<div class="row">
+    <h2>
+        Specialities
+    </h2>
+    <hr />
+    <div class="container container-striped">
+        @foreach (var spec in Model)
+        {
+            <div class="row">
+                <h4>
+                    @Html.ActionLink(spec.Name, "Get", new { id = spec.Id })
+                </h4>
+                <span>Total: @spec.Doctors.Count() doctor(s)</span>
+            </div>
+        }
+    </div>
+    @Html.PagedListPager(Model, page => Url.Action("All", new { page }))
+</div>
+

@@ -10,17 +10,18 @@ using System.Web.Mvc;
 namespace GetADoctor.Web.Areas
 {
     [Authorize]
-    public class SpecialitiesController : BaseController
+    public class cSpecialitiesController : BaseController
     {
         private readonly ISpecialityService specialityService;
         private const int ItemPerPage = 15;
 
-        public SpecialitiesController(ApplicationUserManager userManager, ISpecialityService specialityService) : base(userManager)
+        public cSpecialitiesController(ApplicationUserManager userManager, ISpecialityService specialityService) : base(userManager)
         {
             this.specialityService = specialityService;
         }
 
         // GET: Specialities
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
