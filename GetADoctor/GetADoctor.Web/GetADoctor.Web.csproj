@@ -216,6 +216,7 @@
     <Compile Include="Areas\HomeController.cs" />
     <Compile Include="Areas\ManageController.cs" />
     <Compile Include="Areas\PatientController.cs" />
+    <Compile Include="Areas\SpecialitiesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -227,6 +228,7 @@
     <Compile Include="Models\DoctorSearchViewModel.cs" />
     <Compile Include="Models\DoctorViewModel.cs" />
     <Compile Include="Models\HomeDoctorViewModel.cs" />
+    <Compile Include="Models\Home\HomeTablesViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PatientViewModel.cs" />
@@ -433,10 +435,18 @@
     <Content Include="Views\Doctor\Appointments.cshtml" />
     <Content Include="Views\Home\Results.cshtml" />
     <Content Include="Views\Home\_AjaxResults.cshtml" />
+    <Content Include="Views\Home\_ListDoctorsPartial.cshtml" />
+    <Content Include="Views\Doctor\All.cshtml" />
+    <Content Include="Views\Doctor\Get.cshtml" />
+    <Content Include="Views\Specialities\Index.cshtml" />
+    <Content Include="Views\Specialities\All.cshtml" />
+    <Content Include="Views\Specialities\Get.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Models\Cities\" />
+    <Folder Include="Models\Doctors\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
