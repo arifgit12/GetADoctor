@@ -1,7 +1,61 @@
-﻿
+﻿@using PagedList.Mvc
+@model GetADoctor.Web.Models.Doctors.FilterDoctorsViewModel
 @{
     ViewBag.Title = "All";
 }
 
-<h2>All</h2>
+<div class="row">
+    <div class="top-bottom-padding">
+    </div>
+</div>
+<div class="row">
+    <div class="page-wrapper">
+        <div class="page-header">
+            <h1 class="new_header">Find and Book</h1>
+        </div>
+        <div class="doctor-page-container">
+            <div class="search-container">
+                <div class="doctor-search-container">
+                    @using (Html.BeginForm("All", "Doctor", FormMethod.Get))
+                    {
+                        <div class="form-inline">
+                            <div class="city-container">
+                                <label for="city">City:</label>
+                                @Html.DropDownList("city", Model.Cities, new { @class = "form-control" })
+                            </div>
+                            <div class="speciality-container">
+                                <label for="speciality">Speciality:</label>
+                                @Html.DropDownList("speciality", Model.Specialities, new { @class = "form-control" })
+                            </div>
+                            <div class="search-keywords">
+                                <input class="btn search-button" type="submit" value="Filter" />
+                            </div>
+                        </div>
+                    }
+                </div>                
+            </div>           
+
+            @if (Model.Doctors.Count > 0)
+            {
+                <div class="container container-striped">
+                    @foreach (var doctor in Model.Doctors)
+                    {
+                        <div class="row">
+                            <h3>@Html.ActionLink(doctor.FirstName, "Get", new { id = doctor.DoctorId })</h3>
+                            @*<p>@("UIN: " + doctor.UIN + ", ")@Html.ActionLink(doctor.CityName, "/")</p>*@
+                            <p>@Html.ActionLink(doctor.Speciality.Name, "Get", "Specialities", new { id = doctor.Speciality.Id }, null)</p>
+                        </div>
+                    }
+                </div>
+                @Html.PagedListPager(Model.Doctors, page => Url.Action("All", new { page, city = ViewBag.CityId, speciality = ViewBag.SpecialityId }))
+            }
+            else
+            {
+                <h3 class="text-center">
+                    <span class="label label-default">No result found!</span>
+                </h3>
+            }
+        </div>
+    </div>
+</div>
 

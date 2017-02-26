@@ -73,3 +73,61 @@ select,
 textarea {
     max-width: 400px;
 }
+
+.new_header{
+    text-align: center;
+    font-size: 25px;
+}
+
+.page-wrapper{
+    min-height: 100%;
+    position: relative;
+    background: #fff;
+}
+
+.doctor-page-container{
+    padding: 0.1em 0;
+    box-sizing: border-box;
+}
+
+.doctor-page-container .search-container{
+    background-color: #f0f0f5;
+    width: 960px;
+    margin: 0 auto;
+}
+
+.doctor-search-container {
+    border-radius: 2px;
+    background: #f0f0f5;
+    width: 960px;
+    padding: 6px 8px 2px 8px;
+}
+
+.city-container{
+    position: relative;
+    display: inline-block;
+    width: 200px;
+}
+
+.speciality-container{
+    position: relative;
+    display: inline-block;
+    width: 250px;
+}
+
+.search-keywords{
+    position: relative;
+    display: inline-block;
+}
+
+.search-button {
+    display: inline-block;
+    font-weight: bold;
+    cursor: pointer;
+    color: #4d4d4d;
+    border: 1px solid #1ebef0;
+    background: #1ebef0;
+    text-decoration: none;
+    width: 100px;
+    border-radius: 2px;
+}

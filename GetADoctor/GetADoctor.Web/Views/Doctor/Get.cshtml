@@ -1,7 +1,15 @@
-﻿
+﻿@model GetADoctor.Web.Models.DoctorViewModel
 @{
     ViewBag.Title = "Get";
 }
 
-<h2>Get</h2>
+<div class="row">
+    <div class="top-bottom-padding">
+        <h2>Doctors Details: </h2>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <h2>@Model.FirstName @Model.LastName</h2>
+</div>
 

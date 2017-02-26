@@ -20,11 +20,14 @@
                                 @Html.ActionLink(doctor.FullName, "Get", "Doctors", new { id = doctor.Id }, null)
                             </strong>
                             <small>
-                                @Html.ActionLink(doctor.City.CityName, "All", "Doctors", new { city = doctor.City.CityId }, null)
+                                @if (doctor.City != null)
+                                {
+                                    @Html.ActionLink(doctor.City.CityName, "All", "Doctors", new { city = doctor.City.CityId }, null)
+                                }
                             </small>
                         </div>
                         @if (doctor.Speciality != null)
-                    {
+                        {
                             <div>@Html.ActionLink(doctor.Speciality.Name, "Get", "Specialities", new { id = doctor.Speciality.Id }, null)</div>
                         }
                         else
