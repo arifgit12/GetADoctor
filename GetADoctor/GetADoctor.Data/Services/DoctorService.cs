@@ -12,7 +12,7 @@ namespace GetADoctor.Data.Services
     {
         IEnumerable<Doctor> GetDoctors();
         //List<Doctor> GetDoctors(int page, int size);
-        //List<Doctor> SearchDoctors(String area, String speciality, int page, int size);
+        List<Doctor> SearchDoctors(int? city = null, int? speciality = null);
         Doctor GetDoctorByUserId(string userId);
         Doctor GetDoctor(int id);
         int GetDoctorId(string userId);
@@ -161,6 +161,21 @@ namespace GetADoctor.Data.Services
         public IEnumerable<Appointment> GetAppointmentsByDoctorId(int Id)
         {
             return this._appointmentRepository.SearchFor(d => d.DoctorId == Id).ToList();
+        }
+
+        public List<Doctor> SearchDoctors(int? city = default(int?), int? speciality = default(int?))
+        {
+
+            var doctors = this._doctorRepository.SearchFor( u => (u.User.locations.Any( c => c.CityId == city | city == null )) && (u.SpecialityId == speciality | speciality == null) )
+                .OrderBy(d => d.LastName)
+                .ToList();
+
+            // Get all users
+            // Get all city of the users
+            // Get all the doctors
+            // Get doctors with speciality
+
+            return doctors;
         }
     }
 }

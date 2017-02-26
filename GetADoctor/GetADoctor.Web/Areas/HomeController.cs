@@ -8,11 +8,11 @@ using System.Web.Mvc;
 
 namespace GetADoctor.Web.Areas
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         private readonly IDoctorService doctorService;
-        public HomeController(ApplicationUserManager userManager, IDoctorService doctorservice)
-            : base(userManager)
+        public HomeController() { }
+        public HomeController(IDoctorService doctorservice)
         {
             this.doctorService = doctorservice;
         }
