@@ -62,16 +62,22 @@ namespace GetADoctor.Web.Areas
 
         public ActionResult SearchBest(int page = 1, string name = null, int? speciality = null, string search = null)
         {
-            name = name.Trim();
-            if (name.IndexOf(' ') != -1)
+            if( !string.IsNullOrEmpty(name))
             {
-                name = name.Replace(" ", "|");
+                name = name.Trim();
+                if (name.IndexOf(' ') != -1)
+                {
+                    name = name.Replace(" ", "|");
+                }
             }
 
-            search = search.Trim();
-            if (search.IndexOf(' ') != -1)
+            if (!string.IsNullOrEmpty(search))
             {
-                search = search.Replace(" ", "|");
+                search = search.Trim();
+                if (search.IndexOf(' ') != -1)
+                {
+                    search = search.Replace(" ", "|");
+                }
             }
 
             var doctors = this.doctorService.SearchDoctors(name, speciality, search);

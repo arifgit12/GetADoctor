@@ -22,7 +22,8 @@
                             <small>
                                 @if (doctor.City != null)
                                 {
-                                    @Html.ActionLink(doctor.City.CityName, "All", "Doctors", new { city = doctor.City.CityId }, null)
+                                    @Html.ActionLink(doctor.City.CityName, "SearchBest", "Home",
+                                    new { search = doctor.City.CityName }, null)
                                 }
                             </small>
                         </div>
