@@ -1,5 +1,4 @@
 ﻿@using PagedList.Mvc
-@using GetADoctor.Models.Speciality
 @model GetADoctor.Web.Models.Specialities.HomeSpecialityViewModel
 @{
     ViewBag.Title = "Speciality Details";
@@ -16,9 +15,9 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>име</th>
-                <th>коментари</th>
-                <th>оценка</th>
+                <th>Name</th>
+                <th>Comments</th>
+                <th>Ratings</th>
             </tr>
         </thead>
         <tbody>
@@ -36,7 +35,7 @@
             }
         </tbody>
     </table>
-    @Html.PagedListPager((PagedList.PagedList<SpecialityDoctorViewModel>)Model.Doctors, page => Url.Action("Get", new { page }))
+    @*@Html.PagedListPager((PagedList.PagedList<SpecialityDoctorViewModel>)Model.Doctors, page => Url.Action("Get", new { page }))*@
 </div>
 
 

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace GetADoctor.Data.Services
@@ -13,6 +14,7 @@ namespace GetADoctor.Data.Services
         IEnumerable<Doctor> GetDoctors();
         //List<Doctor> GetDoctors(int page, int size);
         List<Doctor> SearchDoctors(int? city = null, int? speciality = null);
+        List<Doctor> SearchDoctors(string name = null, int? speciality = null, string search = null);
         Doctor GetDoctorByUserId(string userId);
         Doctor GetDoctor(int id);
         int GetDoctorId(string userId);
@@ -174,6 +176,18 @@ namespace GetADoctor.Data.Services
             // Get all city of the users
             // Get all the doctors
             // Get doctors with speciality
+
+            return doctors;
+        }
+
+        public List<Doctor> SearchDoctors(string name = null, int? speciality = default(int?), string search = null)
+        {
+            var doctors = this._doctorRepository.SearchFor(u => 
+                    ( u.FirstName.ToLower().Contains(name.ToLower()) | u.LastName.ToLower().Contains(name.ToLower() ) | string.IsNullOrEmpty(name) ) &&
+                    (u.User.locations.Any(c => c.City.CityName.ToLower().Contains(search.ToLower()) | string.IsNullOrEmpty(search)) ) &&
+                    (u.SpecialityId == speciality | speciality == null))
+               .OrderBy(d => d.LastName)
+               .ToList();
 
             return doctors;
         }
