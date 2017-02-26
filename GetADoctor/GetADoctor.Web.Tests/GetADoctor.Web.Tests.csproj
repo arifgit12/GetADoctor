@@ -94,8 +94,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GetADoctor.Data\GetADoctor.Data.csproj">
+      <Project>{8acdba60-081d-42e5-87cf-ccc52db0a30d}</Project>
+      <Name>GetADoctor.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GetADoctor.Models\GetADoctor.Models.csproj">
+      <Project>{37021aac-21d1-442d-9534-3c4ebc696d21}</Project>
+      <Name>GetADoctor.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GetADoctor.Web\GetADoctor.Web.csproj">
-      <Project>{0E633ADF-B4F0-458C-AD0D-B10506DFE0A0}</Project>
+      <Project>{0e633adf-b4f0-458c-ad0d-b10506dfe0a0}</Project>
       <Name>GetADoctor.Web</Name>
     </ProjectReference>
   </ItemGroup>
