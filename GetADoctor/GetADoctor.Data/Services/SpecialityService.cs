@@ -11,6 +11,7 @@ namespace GetADoctor.Data.Services
     public interface ISpecialityService
     {
         IEnumerable<Speciality> GetSpecialities();
+        IEnumerable<Speciality> GetSpecialtiesByDoctorId(int Id);
         Speciality GetSpeciality(int id);
         int SaveSpeciality(Speciality speciality);
         int UpdateSpeciality(Speciality speciality);
@@ -32,6 +33,12 @@ namespace GetADoctor.Data.Services
         public Speciality GetSpeciality(int id)
         {
             return this._specialityRepo.Get(id);
+        }
+
+        public IEnumerable<Speciality> GetSpecialtiesByDoctorId(int Id)
+        {
+            var specialties = this._specialityRepo.SearchFor(s => s.Doctors.Any(d => d.DoctorId == Id)).ToList();
+            return specialties;
         }
 
         public int SaveSpeciality(Speciality speciality)

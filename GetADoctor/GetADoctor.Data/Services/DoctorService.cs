@@ -3,9 +3,8 @@ using GetADoctor.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using FuzzyString;
+using GetADoctor.Models.Utilities;
 
 namespace GetADoctor.Data.Services
 {
@@ -39,7 +38,9 @@ namespace GetADoctor.Data.Services
         int UpdateSchedule(Schedule model);
 
         IEnumerable<Speciality> GetSpecialities();
+        Speciality GetSpecialtiesByDoctorId(int Id);
         IEnumerable<Appointment> GetAppointmentsByDoctorId(int Id);
+        IEnumerable<Doctor> SearchSimilarDoctors(Doctor doctor);
     }
     public class DoctorService : IDoctorService
     {
@@ -190,6 +191,66 @@ namespace GetADoctor.Data.Services
                .ToList();
 
             return doctors;
+        }
+
+        public IEnumerable<Doctor> SearchSimilarDoctors(Doctor doctor)
+        {
+            var resultDoctors = new List<Doctor>();
+            var tempDoctors = new List<Doctor>();
+
+            var doctors = this._doctorRepository.GetAll().ToList();
+
+            foreach (var singledoctor in doctors)
+            {
+                var specialty = GetSpecialtiesByDoctorId(singledoctor.DoctorId);
+                singledoctor.Speciality = specialty;
+            }
+
+            //check if there is a exactly match, if so, top 1
+            if (doctors.Contains(doctor))
+            {
+                resultDoctors.Add(doctors.Find(x => x.Equals(doctor)));//100% match
+                doctors.Remove(doctor); //remove it
+            }
+
+            //check Name matchs use Dice Distance, if pass name
+            //rule if result over 0.5, means similar
+            if (!string.IsNullOrEmpty(doctor.FirstName))
+            {
+                tempDoctors.AddRange(doctors.Where(singledoctor => doctor.FirstName.SorensenDiceDistance(singledoctor.FirstName) < 0.5));
+            }
+
+            resultDoctors.AddRange(tempDoctors);
+            tempDoctors.Clear();
+
+            /*Check Specialties
+            * 2 possible , 
+            * 1. resultDoctors is not empty, get the doctors who contain the Specialties
+            * 2, resultDoctors is empty, get all doctors who contain the Specialties
+            * If Specialties more than one, consider individual
+            */
+
+            if (doctor.Speciality != null)
+            {
+                // This is required when doctors have more than one speciality
+                //foreach (var specialty in doctor.Specialties)
+                //{
+                //    tempDoctors.AddRange(resultDoctors.Count != 0
+                //        ? resultDoctors.Where(t => t.Specialties.Contains(specialty)).ToList()
+                //        : doctors.Where(t => t.Specialties.Contains(specialty)).ToList());
+                //}
+            }
+
+            //remove duplicate doctors
+            resultDoctors = tempDoctors.Count != 0 ? tempDoctors.Distinct(new DoctorComparer()).ToList() : tempDoctors;
+
+            return resultDoctors;
+        }
+
+        public Speciality GetSpecialtiesByDoctorId(int Id)
+        {
+            var speciality = this._doctorRepository.SearchFor(d => d.DoctorId == Id).FirstOrDefault().Speciality;
+            return speciality;
         }
     }
 }
