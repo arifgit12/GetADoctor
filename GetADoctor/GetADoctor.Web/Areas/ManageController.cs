@@ -149,7 +149,15 @@ namespace GetADoctor.Web.Areas
             string userId = await GetUserId();
             var doctor = _profileService.GetDoctorByUserId(userId);
             var model = AutoMapper.Mapper.Map<DoctorViewModel>(doctor);
-            ViewBag.SpecialityId = new SelectList(this._profileService.GetSpecialities(), "Id", "Name", doctor.SpecialityId);
+
+            if(model.SpecialityId > 0 )
+            {
+                ViewBag.SpecialityId = new SelectList(this._profileService.GetSpecialities(), "Id", "Name", model.SpecialityId);
+            }
+            else
+            {
+                ViewBag.SpecialityId = new SelectList(this._profileService.GetSpecialities(), "Id", "Name");
+            }
 
             return View(model);
         }
@@ -169,7 +177,14 @@ namespace GetADoctor.Web.Areas
                 {
                     return RedirectToAction("Index", "Manage");
                 }
-
+            }
+            if (model.SpecialityId == null)
+            {
+                ViewBag.SpecialityId = new SelectList(this._profileService.GetSpecialities(), "Id", "Name");
+            }
+            else
+            {
+                ViewBag.SpecialityId = new SelectList(this._profileService.GetSpecialities(), "Id", "Name", model.SpecialityId);
             }
 
             return View(model);
@@ -203,7 +218,7 @@ namespace GetADoctor.Web.Areas
                     return RedirectToAction("Index", "Manage");
                 }
             }
-            return View();
+            return View(model);
         }
 
         /**************************BEGIN ADDRESS**********************************************/

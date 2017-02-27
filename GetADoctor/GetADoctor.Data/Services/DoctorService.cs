@@ -183,10 +183,10 @@ namespace GetADoctor.Data.Services
 
         public List<Doctor> SearchDoctors(string name = null, int? speciality = default(int?), string search = null)
         {
-            var doctors = this._doctorRepository.SearchFor(u => 
-                    ( u.FirstName.ToLower().Contains(name.ToLower()) | u.LastName.ToLower().Contains(name.ToLower() ) | string.IsNullOrEmpty(name) ) &&
-                    (u.User.locations.Any(c => c.City.CityName.ToLower().Contains(search.ToLower()) | string.IsNullOrEmpty(search)) ) &&
-                    (u.SpecialityId == speciality | speciality == null))
+            var doctors = this._doctorRepository.SearchFor(u =>
+                    (u.SpecialityId == speciality | speciality == null) &&
+                    (u.FirstName.ToLower().Contains(name.ToLower()) | u.LastName.ToLower().Contains(name.ToLower()) | string.IsNullOrEmpty(name)) &&
+                    (u.User.locations.Any(c => c.City.CityName.ToLower().Contains(search.ToLower()) | string.IsNullOrEmpty(search))))
                .OrderBy(d => d.LastName)
                .ToList();
 

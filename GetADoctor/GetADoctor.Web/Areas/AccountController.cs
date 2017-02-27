@@ -190,23 +190,32 @@ namespace GetADoctor.Web.Areas
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    UserManager.AddToRole(user.Id, UserRoles.Doctor.ToString());
-                    var doctor = new Doctor();
-                    doctor.UserId = user.Id;
-                    doctor.LastName = model.LastName;
-                    doctor.FirstName = model.FirstName;
-                    doctor.UIN = model.UIN;
-                    doctor.MobileNumber = model.MobileNumber;
-                    var isSave =  _doctorService.SaveDoctor(doctor);
-                    //_doctorService.SaveAddress(new Location(), user.Id);
-                    //await _doctorService.SaveSchedule(new Schedule(), user.Id);
-                    if(isSave > 0)
+                    try
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                        return RedirectToAction("Index", "Home");
+                        UserManager.AddToRole(user.Id, UserRoles.Doctor.ToString());
+                        var doctor = new Doctor();
+                        doctor.UserId = user.Id;
+                        doctor.LastName = model.LastName;
+                        doctor.FirstName = model.FirstName;
+                        doctor.UIN = model.UIN;
+                        doctor.MobileNumber = model.MobileNumber;
+                        var isSave = _doctorService.SaveDoctor(doctor);
+                        if (isSave > 0)
+                        {
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            await UserManager.DeleteAsync(user);
+                        }
                     }
-                    
+                    catch (Exception e)
+                    {
+                        await UserManager.DeleteAsync(user);
+                        ModelState.AddModelError(string.Empty, "Unable to crate doctor Profile.");
+                        ModelState.AddModelError(string.Empty, "Make sure UIN number is correct. Already registered");
+                    }
                 }
                 AddErrors(result);
             }
@@ -240,14 +249,28 @@ namespace GetADoctor.Web.Areas
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    UserManager.AddToRole(user.Id, UserRoles.Patient.ToString());
-                    var patient = new Patient();
-                    patient.UserId = user.Id;
-                    var isSave = _patientService.SavePatient(patient);
+                    try
+                    {
+                        UserManager.AddToRole(user.Id, UserRoles.Patient.ToString());
+                        var patient = new Patient();
+                        patient.UserId = user.Id;
 
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        var isSave = _patientService.SavePatient(patient);
+                        if (isSave > 0)
+                        {
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    return RedirectToAction("Index", "Home");
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            await UserManager.DeleteAsync(user);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        ModelState.AddModelError(string.Empty, "Unable to crate patient Profile.");
+                    }
                 }
                 AddErrors(result);
             }

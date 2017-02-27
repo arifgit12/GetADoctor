@@ -65,19 +65,19 @@ namespace GetADoctor.Web.Areas
             if( !string.IsNullOrEmpty(name))
             {
                 name = name.Trim();
-                if (name.IndexOf(' ') != -1)
-                {
-                    name = name.Replace(" ", "|");
-                }
+                //if (name.IndexOf(' ') != -1)
+                //{
+                //    name = name.Replace(" ", "|");
+                //}
             }
 
             if (!string.IsNullOrEmpty(search))
             {
                 search = search.Trim();
-                if (search.IndexOf(' ') != -1)
-                {
-                    search = search.Replace(" ", "|");
-                }
+                //if (search.IndexOf(' ') != -1)
+                //{
+                //    search = search.Replace(" ", "|");
+                //}
             }
 
             var doctors = this.doctorService.SearchDoctors(name, speciality, search);

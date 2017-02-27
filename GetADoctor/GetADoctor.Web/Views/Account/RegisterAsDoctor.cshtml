@@ -16,13 +16,15 @@
                     <div class="form-group">
                         <label for="inputFName" class="col-lg-4 control-label">First Name *</label>
                         <div class="col-lg-8">
-                            <input type="text" class="form-control" required="" id="inputFName" name="FirstName" placeholder="First Name">
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputLName" class="col-lg-4 control-label">Last Name *</label>
                         <div class="col-lg-8">
-                            <input type="text" class="form-control" id="inputLName" required="" name="LastName" placeholder="Last Name">
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
@@ -37,26 +39,30 @@
                     <div class="form-group">
                         <label for="inputEmail" class="col-lg-4 control-label">Email *</label>
                         <div class="col-lg-8">
-                            <input type="text" class="form-control" id="userName" required="" placeholder="Email" name="Email">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputEmail" class="col-lg-4 control-label">Mobile Number *</label>
                         <div class="col-lg-8">
-                            <input type="text" class="form-control" required="" placeholder="Mobile Number" name="MobileNumber">
+                            @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputPassword" class="col-lg-4 control-label">Password *</label>
                         <div class="col-lg-8">
-                            <input type="password" class="form-control" required="" id="inputPassword" placeholder="Password" name="Password">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputCPassword" class="col-lg-4 control-label">Confirm Password *</label>
                         <div class="col-lg-8">
-                            <input type="password" class="form-control" required="" id="inputCPassword" placeholder="Confirm Password" name="ConfirmPassword">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
