@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using GetADoctor.Web;
 using GetADoctor.Web.Areas;
 
 namespace GetADoctor.Web.Tests.Controllers

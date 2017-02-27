@@ -24,6 +24,7 @@ namespace GetADoctor.Models
         private ICollection<Comment> comments;
         private ICollection<Rating> ratings;
         private ICollection<Patient> patients;
+        public virtual ICollection<Location> locations { get; set; }
 
         public ApplicationUser()
         {
@@ -31,6 +32,7 @@ namespace GetADoctor.Models
             this.comments = new HashSet<Comment>();
             this.ratings = new HashSet<Rating>();
             this.patients = new HashSet<Patient>();
+            this.locations = new HashSet<Location>();
         }
 
         public ICollection<Doctor> Doctors

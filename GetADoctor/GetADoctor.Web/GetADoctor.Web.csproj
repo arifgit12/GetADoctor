@@ -453,6 +453,7 @@
     <Content Include="Views\cSpecialities\Index.cshtml" />
     <Content Include="Views\cSpecialities\All.cshtml" />
     <Content Include="Views\cSpecialities\Get.cshtml" />
+    <Content Include="Views\Home\SearchBest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

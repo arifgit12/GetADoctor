@@ -45,7 +45,9 @@ namespace GetADoctor.Web.Infrastructure.Mapping
                     .ForMember(d => d.RatingsCount,
                         opt => opt.MapFrom(d => d.Rating.Count))
                     .ForMember(d => d.CommentsCount,
-                        opt => opt.MapFrom(d => d.Comments.Count));
+                        opt => opt.MapFrom(d => d.Comments.Count))
+                    .ForMember(d => d.City,
+                        opt => opt.MapFrom(d => d.User.locations.FirstOrDefault().City));
 
                 config.CreateMap<Doctor, DoctorSearchViewModel>()
                     .ForMember(d => d.FullName, opt => opt.MapFrom(d => d.FirstName + " " + d.LastName));

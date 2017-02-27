@@ -17,12 +17,13 @@
                     <td>
                         <div>
                             <strong>
-                                @Html.ActionLink(doctor.FullName, "Get", "Doctors", new { id = doctor.Id }, null)
+                                @Html.ActionLink(doctor.FullName, "Get", "Doctor", new { id = doctor.Id }, null)
                             </strong>
                             <small>
                                 @if (doctor.City != null)
                                 {
-                                    @Html.ActionLink(doctor.City.CityName, "All", "Doctors", new { city = doctor.City.CityId }, null)
+                                    @Html.ActionLink(doctor.City.CityName, "SearchBest", "Home",
+                                    new { search = doctor.City.CityName }, null)
                                 }
                             </small>
                         </div>

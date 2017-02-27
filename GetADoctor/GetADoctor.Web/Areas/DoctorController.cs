@@ -124,10 +124,7 @@ namespace GetADoctor.Web.Areas
             ViewBag.SpecialityId = speciality;
 
             var docmodel = this._doctorService
-                .GetDoctors()
-                .Where(d => (d.SpecialityId == speciality | speciality == null))
-                .OrderBy(d => d.LastName)
-                .ToList();
+                .SearchDoctors(city, speciality);
 
             var doctors = AutoMapper.Mapper.Map<IEnumerable<DoctorViewModel>>(docmodel);
 

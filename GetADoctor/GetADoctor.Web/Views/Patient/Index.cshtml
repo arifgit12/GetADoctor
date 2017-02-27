@@ -12,7 +12,7 @@
     <table class="table table-bordered">
         <tr>
             <th>@Html.DisplayNameFor(model => model.FullName)</th>
-            <th>@Html.DisplayNameFor(model => model.City)</th>
+            <th>@Html.DisplayNameFor(model => model.City.CityName)</th>
             <th>@Html.DisplayNameFor(model => model.Speciality)</th>
             <th>Action</th>
         </tr>
@@ -20,7 +20,7 @@
             {
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.FullName)</td>
-                <td>@Html.DisplayFor(modelItem => item.City)</td>
+                <td>@Html.DisplayFor(modelItem => item.City.CityName)</td>
                 <td>@Html.DisplayFor(modelItem => item.Speciality.Name)</td>
                 <td>@Html.ActionLink("BOOK", "Appointment", new { id = item.Id })</td>
             </tr>
