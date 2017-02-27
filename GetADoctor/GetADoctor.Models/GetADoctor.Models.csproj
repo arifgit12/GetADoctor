@@ -70,6 +70,8 @@
     <Compile Include="Speciality.cs" />
     <Compile Include="State.cs" />
     <Compile Include="SystemEntity.cs" />
+    <Compile Include="Utilities\DoctorComparer.cs" />
+    <Compile Include="Utilities\SpecialtiesComparer.cs" />
     <Compile Include="Waiting.cs" />
   </ItemGroup>
   <ItemGroup>

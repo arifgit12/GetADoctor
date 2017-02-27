@@ -20,10 +20,10 @@ namespace GetADoctor.Models
     }
     public class ApplicationUser : IdentityUser
     {
-        private ICollection<Doctor> doctors;
         private ICollection<Comment> comments;
         private ICollection<Rating> ratings;
         private ICollection<Patient> patients;
+        public virtual ICollection<Doctor> doctors { get; set; }
         public virtual ICollection<Location> locations { get; set; }
 
         public ApplicationUser()
@@ -33,12 +33,6 @@ namespace GetADoctor.Models
             this.ratings = new HashSet<Rating>();
             this.patients = new HashSet<Patient>();
             this.locations = new HashSet<Location>();
-        }
-
-        public ICollection<Doctor> Doctors
-        {
-            get { return this.doctors; }
-            set { this.doctors = value; }
         }
 
         public virtual ICollection<Comment> Comments
