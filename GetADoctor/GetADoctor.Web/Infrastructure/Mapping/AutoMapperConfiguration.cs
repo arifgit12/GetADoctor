@@ -60,7 +60,9 @@ namespace GetADoctor.Web.Infrastructure.Mapping
                         opt => opt.MapFrom(x => x.Rating.Count > 0
                             ? (float)x.Rating.Sum(r => r.Value) / x.Rating.Count : 0))
                    .ForMember(d => d.CommentsCount,
-                        opt => opt.MapFrom(x => x.Comments.Count));
+                        opt => opt.MapFrom(x => x.Comments.Count))
+                   .ForMember(d => d.Id,
+                        opt => opt.MapFrom(x => x.DoctorId));
 
                 config.CreateMap<Appointment, AppointmentViewModel>();
                 config.CreateMap<AppointmentViewModel, Appointment>();

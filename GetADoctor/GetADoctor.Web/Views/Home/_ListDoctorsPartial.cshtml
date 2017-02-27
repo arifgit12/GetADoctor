@@ -29,7 +29,7 @@
                         </div>
                         @if (doctor.Speciality != null)
                         {
-                            <div>@Html.ActionLink(doctor.Speciality.Name, "Get", "Specialities", new { id = doctor.Speciality.Id }, null)</div>
+                            <div>@Html.ActionLink(doctor.Speciality.Name, "Get", "cSpecialities", new { id = doctor.Speciality.Id }, null)</div>
                         }
                         else
                         {
