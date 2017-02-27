@@ -78,6 +78,7 @@
     <Compile Include="Repositories\ScheduleRepository.cs" />
     <Compile Include="Repositories\SpecialityRepository.cs" />
     <Compile Include="Repositories\StateRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\WaitingRepository.cs" />
     <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\DoctorService.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Services\ProfileService.cs" />
     <Compile Include="Services\SpecialityService.cs" />
     <Compile Include="Services\StateService.cs" />
+    <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612162047030_intialcreate.resx">

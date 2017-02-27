@@ -51,5 +51,10 @@ namespace GetADoctor.Models
             get { return this.rating; }
             set { this.rating = value; }
         }
+
+        public string DisplayName
+        {
+            get { return FirstName + " " + LastName; }
+        }
     }
 }
