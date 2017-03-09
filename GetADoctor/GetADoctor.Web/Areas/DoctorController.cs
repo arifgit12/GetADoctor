@@ -169,6 +169,12 @@ namespace GetADoctor.Web.Areas
             }
 
             var existingDoctor = Mapper.Map<DoctorViewModel>(doctor);
+            var schedules  = _doctorService.GetSchedulesByDoctorId(doctor.DoctorId).ToList();
+            ViewBag.Schedules = schedules.Select(s => new SelectListItem
+            {
+                Value = s.Dates.ToString(),
+                Text = s.Dates
+            });
             return View(existingDoctor);
         }
     }

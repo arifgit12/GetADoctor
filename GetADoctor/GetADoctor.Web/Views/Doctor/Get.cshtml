@@ -1,15 +1,38 @@
 ﻿@model GetADoctor.Web.Models.DoctorViewModel
 @{
     ViewBag.Title = "Get";
+    var schedules = ViewBag.Schedules;
 }
 
-<div class="row">
-    <div class="top-bottom-padding">
-        <h2>Doctors Details: </h2>
-        <hr />
+<div class="row top-bottom-padding">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h2>Doctors Details</h2>
+            <hr />
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="https://images1-fabric.practo.com/dr-shobha-venkat-1474260839-57df6f67b25ea.jpg" alt="" />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h1>@Model.FirstName @Model.LastName</h1>
+                <p>@Model.CityName</p>
+                <h2>Speciality: @Model.Speciality.Name</h2>
+                <h3>Age: @Model.Age</h3>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>Book Appointment</h2>
+            <hr />
+            <h2>Avaiable Dates: </h2>
+            @foreach (var item in schedules)
+            {
+                <h3>@item.Text</h3>
+            }
+            <h4>
+                @Html.ActionLink("BOOK", "Appointment", "Patient", new { id = Model.DoctorId }, new { @class = "btn btn-success" })
+            </h4>           
+        </div>   
     </div>
-</div>
-<div class="row">
-    <h2>@Model.FirstName @Model.LastName</h2>
 </div>
 
