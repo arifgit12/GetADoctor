@@ -175,6 +175,9 @@ namespace GetADoctor.Web.Areas
                 Value = s.Dates.ToString(),
                 Text = s.Dates
             });
+
+            ViewBag.UserName = doctor.User.UserName;
+            ViewBag.FileName = doctor.User.ProfilePicUrl;
             return View(existingDoctor);
         }
     }

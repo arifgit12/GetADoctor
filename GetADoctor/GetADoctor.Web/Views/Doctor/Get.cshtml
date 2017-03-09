@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Get";
     var schedules = ViewBag.Schedules;
+    var filePath = "../../Content/Uploads/Account/" + ViewBag.UserName + "/" + ViewBag.FileName;
 }
 
 <div class="row top-bottom-padding">
@@ -10,9 +11,12 @@
             <h2>Doctors Details</h2>
             <hr />
             <div class="col-md-4">
-                <div class="thumbnail">
-                    <img src="https://images1-fabric.practo.com/dr-shobha-venkat-1474260839-57df6f67b25ea.jpg" alt="" />
-                </div>
+                @if ((ViewBag.FileName).Length > 0)
+                {
+                    <div class="thumbnail">
+                        <img class="img-responsive" src="@filePath" alt="account-image" />
+                    </div>
+                }
             </div>
             <div class="col-md-8">
                 <h1>@Model.FirstName @Model.LastName</h1>
