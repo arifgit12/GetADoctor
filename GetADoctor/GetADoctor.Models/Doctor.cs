@@ -28,6 +28,10 @@ namespace GetADoctor.Models
         public String Gender { get; set; }
         public String MobileNumber { get; set; }
         public String ImageUrl { get; set; }
+        public string YearsOfExperience { get; set; }
+        public string ShortProfile { get; set; }
+        public string Expertise { get; set; }
+        public string Website { get; set; }
 
         [ForeignKey("Speciality")]
         public int? SpecialityId { get; set; }
