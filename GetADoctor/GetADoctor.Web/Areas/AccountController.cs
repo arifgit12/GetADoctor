@@ -212,6 +212,7 @@ namespace GetADoctor.Web.Areas
                     }
                     catch (Exception e)
                     {
+                        string error = e.Message.ToString();
                         await UserManager.DeleteAsync(user);
                         ModelState.AddModelError(string.Empty, "Unable to crate doctor Profile.");
                         ModelState.AddModelError(string.Empty, "Make sure UIN number is correct. Already registered");
@@ -316,7 +317,6 @@ namespace GetADoctor.Web.Areas
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

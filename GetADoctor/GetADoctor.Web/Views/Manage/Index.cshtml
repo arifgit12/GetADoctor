@@ -2,43 +2,49 @@
 @using GetADoctor.Models
 @{
     ViewBag.Title = "Manage your account";
+    var filePath = "Content/Uploads/Account/" + "admin@admin.com/ae3a160f-f4a1-47a9-baac-7f6f4b3c410f.jpg";
 }
 <div class="row">
     <div class="top-bottom-padding">
         <h2>@ViewBag.Title.</h2>
         <hr />
         <p class="text-success">@ViewBag.StatusMessage</p>
-        <div>
-            <dl class="dl-horizontal">
-                <dt>Password: </dt>
-                <dd>
-                    [
-                    @if (Model.HasPassword)
-                    {
-                        @Html.ActionLink("Change your password", "ChangePassword")
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Create", "SetPassword")
-                    }
-                    ]
-                </dd>
-                <dt>Address: </dt>
-                <dd>
-                    [
-                    @if (Model.HasAddress)
-                    {
-                        @Html.ActionLink("Edit Address", "EditAddress")
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Add Address", "AddAddress")
-                    }
-                    ]
-                </dd>
-                <dt>Profile: </dt>
-                <dd>
-                    [
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">        
+        <div class="col-md-6">
+            <div>
+                <dl class="dl-horizontal">
+                    <dt>Password: </dt>
+                    <dd>
+                        [
+                        @if (Model.HasPassword)
+                        {
+                            @Html.ActionLink("Change your password", "ChangePassword")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Create", "SetPassword")
+                        }
+                        ]
+                    </dd>
+                    <dt>Address: </dt>
+                    <dd>
+                        [
+                        @if (Model.HasAddress)
+                        {
+                            @Html.ActionLink("Edit Address", "EditAddress")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Add Address", "AddAddress")
+                        }
+                        ]
+                    </dd>
+                    <dt>Profile: </dt>
+                    <dd>
+                        [
                         @if (User.IsInRole(UserRoles.Patient.ToString()))
                         {
                             @Html.ActionLink("Update Profile", "UserProfile")
@@ -47,15 +53,25 @@
                         {
                             @Html.ActionLink("Update Profile", "DoctorProfile")
                         }
-                    ]
-                </dd>              
-                <dt>External Logins:</dt>
-                <dd>
-                    @Model.Logins.Count [
-                    @Html.ActionLink("Manage", "ManageLogins") ]
-                </dd>               
-            </dl>
+                        ]
+                    </dd>
+                    <dt>External Logins:</dt>
+                    <dd>
+                        @Model.Logins.Count [
+                        @Html.ActionLink("Manage", "ManageLogins") ]
+                    </dd>
+                    <dt>Update Image Profile:</dt>
+                    <dd>
+                        @Html.ActionLink("Profile Picture", "ProfilePicture", "Manage")
+                    </dd>
+                </dl>
+            </div>
         </div>
-    </div>
+        <div class="col-md-6">
+            <div class="thumbnail">
+                <img class="img-responsive" src="@filePath" alt="account-image" />
+            </div>
+        </div>
+    </div>    
 </div>
 

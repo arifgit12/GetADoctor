@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "ProfilePicture";
+}
+
+<div class="row top-bottom-padding">
+    <h2>Update Profile Picture</h2>
+    <hr />
+    @using (Html.BeginForm("ProfilePicture", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.Label("Profile Picture", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="file" name="upload" class="form-control" />
+                    <span style="color:green">@ViewBag.Message</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Upload" class="btn btn-success" />
+                    @Html.ActionLink("Cancel", "Index", "Manage", null, new { @class="btn btn-warning" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+

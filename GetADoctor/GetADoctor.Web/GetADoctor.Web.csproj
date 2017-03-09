@@ -228,6 +228,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Cryptography\Encoding.cs" />
+    <Compile Include="Infrastructure\FileHelper\FileUtils.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperConfiguration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddressViewModel.cs" />
@@ -455,6 +457,7 @@
     <Content Include="Views\cSpecialities\Get.cshtml" />
     <Content Include="Views\Home\SearchBest.cshtml" />
     <Content Include="Views\Home\_SearchPartial.cshtml" />
+    <Content Include="Views\Manage\ProfilePicture.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

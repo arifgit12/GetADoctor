@@ -10,6 +10,7 @@ using GetADoctor.Web.Models;
 using GetADoctor.Data.Services;
 using GetADoctor.Models;
 using AutoMapper;
+using GetADoctor.Web.Infrastructure.FileHelper;
 
 namespace GetADoctor.Web.Areas
 {
@@ -108,6 +109,32 @@ namespace GetADoctor.Web.Areas
                 message = ManageMessageId.Error;
             }
             return RedirectToAction("ManageLogins", new { Message = message });
+        }
+
+        //
+        // GET: /Manage/ProfilePicture
+        public ActionResult ProfilePicture()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ProfilePicture(HttpPostedFileBase upload)
+        {
+            if (upload.ContentLength > 0)
+            {
+                string uploadedFileName = FileUtils.UploadFile(upload, User.Identity.GetUserName());
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                user.ProfilePicUrl = uploadedFileName;
+                var result = await UserManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+
+            return View();
         }
 
         //
