@@ -30,3 +30,4 @@ _ReSharper*/
 *.log
 packages/*.*.*
 */Uploads/
+*/Content/Uploads/*
