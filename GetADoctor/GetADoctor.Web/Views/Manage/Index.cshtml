@@ -2,7 +2,7 @@
 @using GetADoctor.Models
 @{
     ViewBag.Title = "Manage your account";
-    var filePath = "Content/Uploads/Account/" + "admin@admin.com/ae3a160f-f4a1-47a9-baac-7f6f4b3c410f.jpg";
+    var filePath = "Content/Uploads/Account/" + ViewBag.UserName + "/" + ViewBag.FileName;
 }
 <div class="row">
     <div class="top-bottom-padding">
@@ -68,9 +68,12 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="thumbnail">
-                <img class="img-responsive" src="@filePath" alt="account-image" />
-            </div>
+            @if ((ViewBag.FileName).Length > 0)
+            {
+                <div class="thumbnail">
+                    <img class="img-responsive" src="@filePath" alt="account-image" />
+                </div>
+            }
         </div>
     </div>    
 </div>

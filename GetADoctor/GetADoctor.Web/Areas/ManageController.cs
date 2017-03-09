@@ -75,6 +75,7 @@ namespace GetADoctor.Web.Areas
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
@@ -84,6 +85,8 @@ namespace GetADoctor.Web.Areas
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
                 HasAddress = _locationService.GetAddressByUserId(userId) != null ? true : false
             };
+            ViewBag.UserName = User.Identity.GetUserName();
+            ViewBag.FileName = user.ProfilePicUrl;
             return View(model);
         }
 
