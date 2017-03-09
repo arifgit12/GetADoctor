@@ -131,3 +131,43 @@ textarea {
     width: 100px;
     border-radius: 2px;
 }
+
+.profile-container {
+    width: 880px;
+    float: left;
+    margin: 15px 10px 0 0;
+}
+
+.profile-container .profile-summary {
+    padding: 20px;
+    box-sizing: border-box;
+    background: #FFF;
+}
+
+.doc_photo {
+    width: 120px;
+    float: left;
+}
+
+.doctor-details-container {
+    float: left;
+    width: 720px;
+    position: relative;
+}
+
+.doctor-details-wrapper {
+    float: left;
+    width: 450px;
+}
+
+.doctor-summary {
+    width: 720px;
+    font-size: 14px;
+    line-height: 1.3;
+    margin-top: 10px;
+    float: right;
+}
+
+/*.clear {
+    clear: both;
+}*/

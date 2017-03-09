@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace GetADoctor.Web.Areas
 {
+    [Authorize]
     public class PatientController : BaseController
     {
         private IDoctorService _doctorService;
