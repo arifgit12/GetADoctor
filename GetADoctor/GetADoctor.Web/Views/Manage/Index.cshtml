@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            @if ((ViewBag.FileName).Length > 0)
+            @if ((ViewBag.FileName) != null && (ViewBag.FileName).Length > 0)
             {
                 <div class="thumbnail">
                     <img class="img-responsive" src="@filePath" alt="account-image" />

@@ -39,7 +39,7 @@ namespace GetADoctor.Web.Areas
         {
             string userId = await GetUserId();
             var doctorId = _doctorService.GetDoctorId(userId);
-            var appointments = _doctorService.GetAppointmentsByDoctorId(doctorId);
+            var appointments = _doctorService.GetAppointmentsByDoctorId(doctorId).OrderByDescending(s => s.Date);
             var model = Mapper.Map<IEnumerable<AppointmentViewModel>>(appointments);
             return View(model);
         }
@@ -47,7 +47,7 @@ namespace GetADoctor.Web.Areas
         public async Task<ActionResult> Schedules()
         {
             string userId = await GetUserId();
-            var schedules = _doctorService.GetAllScheduleByUserId(userId);
+            var schedules = _doctorService.GetAllScheduleByUserId(userId).OrderByDescending(sh => sh.Dates);
             var model = Mapper.Map<IEnumerable<ScheduleViewModel>>(schedules);
             return View(model);
         }
@@ -169,7 +169,8 @@ namespace GetADoctor.Web.Areas
             }
 
             var existingDoctor = Mapper.Map<DoctorViewModel>(doctor);
-            var schedules  = _doctorService.GetSchedulesByDoctorId(doctor.DoctorId).ToList();
+            var schedules  = _doctorService.GetSchedulesByDoctorId(doctor.DoctorId)
+                                .OrderByDescending(d => d.Dates ).ToList();
             ViewBag.Schedules = schedules.Select(s => new SelectListItem
             {
                 Value = s.Dates.ToString(),
