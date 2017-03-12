@@ -61,7 +61,8 @@ namespace GetADoctor.Web.Areas
             var model = new AppointmentViewModel();
             model.DoctorId = doctor.DoctorId;
             model.Doctor = doctor;
-            var schedules = _doctorService.GetSchedulesByDoctorId(doctor.DoctorId).ToList();
+            var schedules = _doctorService.GetSchedulesByDoctorId(doctor.DoctorId).ToList()
+                            .Where(d => DateTime.Parse(d.Dates).Date >= DateTime.Now.Date);
             model.ScheduleDates = schedules.Select(s => new SelectListItem
             {
                 Value = s.Dates.ToString(),
