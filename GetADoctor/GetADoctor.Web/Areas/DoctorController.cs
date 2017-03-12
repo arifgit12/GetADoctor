@@ -170,7 +170,11 @@ namespace GetADoctor.Web.Areas
 
             var existingDoctor = Mapper.Map<DoctorViewModel>(doctor);
             var schedules  = _doctorService.GetSchedulesByDoctorId(doctor.DoctorId)
-                                .OrderByDescending(d => d.Dates ).ToList();
+                                .OrderByDescending(d => d.Dates ).ToList()
+                                .Where(d => DateTime.Parse(d.Dates).Date >= DateTime.Now.Date);
+
+            //schedules.Where(d => DateTime.Parse(d.Dates).Date <= DateTime.Now.Date);
+
             ViewBag.Schedules = schedules.Select(s => new SelectListItem
             {
                 Value = s.Dates.ToString(),
