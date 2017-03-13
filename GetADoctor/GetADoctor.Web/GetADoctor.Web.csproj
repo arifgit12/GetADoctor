@@ -221,6 +221,7 @@
     <Compile Include="Areas\AccountController.cs" />
     <Compile Include="Areas\BaseController.cs" />
     <Compile Include="Areas\DoctorController.cs" />
+    <Compile Include="Areas\ErrorController.cs" />
     <Compile Include="Areas\HomeController.cs" />
     <Compile Include="Areas\ManageController.cs" />
     <Compile Include="Areas\PatientController.cs" />
@@ -458,6 +459,9 @@
     <Content Include="Views\Home\SearchBest.cshtml" />
     <Content Include="Views\Home\_SearchPartial.cshtml" />
     <Content Include="Views\Manage\ProfilePicture.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
