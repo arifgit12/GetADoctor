@@ -96,6 +96,9 @@ textarea {
     margin: 0 auto;
 }
 
+.search-container {
+    width: 300px;
+}
 .doctor-search-container {
     border-radius: 2px;
     background: #f0f0f5;
@@ -179,4 +182,12 @@ textarea {
     text-align: center;
     box-shadow: inset 0 0 0 1px #e5e5e5;
     border: 0;
+}
+
+
+hr {
+    height: 1px;
+    color: #123455;
+    background-color: #e5e5e5;
+    border: none;
 }
