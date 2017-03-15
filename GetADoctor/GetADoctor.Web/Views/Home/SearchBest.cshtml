@@ -2,6 +2,7 @@
 @model GetADoctor.Web.Models.Doctors.FilterDoctorsViewModel
 @{
     ViewBag.Title = "Search Best";
+    //var filePath = "Content/Uploads/Account/";
 }
 
 <div class="row top-bottom-padding">
@@ -31,7 +32,7 @@
                     <input class="form-control" type="text" name="search" placeholder="Enter City or ZipCode" maxlength="50" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Search" class="form-control">
+                    <input type="submit" value="Search" class="form-control btn btn-success">
                 </div>
             </div>
         }
@@ -41,17 +42,38 @@
 </div>
 <div class="row">
     @if (Model.Doctors.Count > 0)
-            {
-        <div class="container container-striped">
-            @foreach (var doctor in Model.Doctors)
-            {
-                <div class="row">
-                    <h3>@Html.ActionLink(doctor.FirstName, "Get", "Doctor", new { id = doctor.DoctorId }, null)</h3>
-                    <p>@Html.ActionLink(doctor.Speciality.Name, "Get", "cSpecialities", new { id = doctor.Speciality.Id }, null)</p>
+    {
+        foreach (var doctor in Model.Doctors)
+        {
+            <div class="row search-row-container">
+                <div class="col-md-6 doc-prof-row">
+                    <div class="col-md-4">
+                        @{
+                            var filePath = "../Content/Uploads/Account/" + doctor.UserName + "/" + doctor.ImageUrl;
+                        }
+                        <img class="img-circle img-responsive" src=@filePath />
+                    </div>
+                    <div class="col-md-8">
+                        <div>
+                            <h3>Speciality: @doctor.Speciality.Name</h3>
+                            <h3>Name: @doctor.FirstName @doctor.LastName</h3>
+                        </div>
+                        <div>
+                            @Html.ActionLink(doctor.FirstName, "Get", "Doctor", new { id = doctor.DoctorId }, new { @class="btn btn-primary" })
+                            @Html.ActionLink(doctor.Speciality.Name, "Get", "cSpecialities", new { id = doctor.Speciality.Id }, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
                 </div>
-            }
+                <div class="col-md-6">
+
+                </div>
+
+            </div>
+        }
+
+        <div class="row">
+            @Html.PagedListPager(Model.Doctors, page => Url.Action("All", new { page, city = ViewBag.CityId, speciality = ViewBag.SpecialityId }))
         </div>
-                @Html.PagedListPager(Model.Doctors, page => Url.Action("All", new { page, city = ViewBag.CityId, speciality = ViewBag.SpecialityId }))
     }
     else
     {
