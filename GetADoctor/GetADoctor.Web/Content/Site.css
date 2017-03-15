@@ -168,6 +168,15 @@ textarea {
     float: right;
 }
 
-/*.clear {
-    clear: both;
-}*/
+.home-features-wrapper {
+    margin-bottom: -3em;
+}
+
+.home-feature {
+    line-height: 2;
+    margin-bottom: 3em;
+    padding: 36px;
+    text-align: center;
+    box-shadow: inset 0 0 0 1px #e5e5e5;
+    border: 0;
+}

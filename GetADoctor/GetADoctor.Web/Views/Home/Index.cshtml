@@ -37,7 +37,7 @@
     </div>
     <hr />
 </div>
-<div class="row">
+<div class="row home-feature">
     <div class="col-md-6">
         <h3 class="text-center">@Html.DisplayNameFor(model => model.MostCommented)</h3>
         @Html.Partial("_ListDoctorsPartial", Model.MostCommented)
@@ -45,5 +45,81 @@
     <div class="col-md-6">
         <h3 class="text-center">@Html.DisplayNameFor(model => model.HighestRating)</h3>
         @Html.Partial("_ListDoctorsPartial", Model.HighestRating)
+    </div>
+</div>
+<div class="row">
+    <div style="text-align:center">
+        <h2>Are You A Doctor?</h2>
+        <br />
+    </div>
+</div>
+<div class="home-features-wrapper row">    
+    <div class="col-md-4">
+        <div class="home-feature">
+            <div>
+                <img class="img-responsive" src="~/Content/Images/doctor.png" />
+            </div>
+            <div>
+                <h3>Create an Account</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="home-feature">
+            <div>
+                <img class="img-responsive" src="~/Content/Images/health-care.png" />
+            </div>
+            <div>
+                <h3>List your practices</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="home-feature">
+            <div>
+                <img class="img-responsive" src="~/Content/Images/pharmacy.png" />
+            </div>
+            <div>
+                <h3>Get Patients</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div style="text-align:center">
+        <h2>Are You A Patient?</h2>
+        <br />
+    </div>
+</div>
+<div class="home-features-wrapper row">
+    <div class="col-md-4">
+        <div class="home-feature">
+            <div>
+                <img class="img-responsive" src="~/Content/Images/health-care.png" />
+            </div>
+            <div>
+                <h3>Find Doctors</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="home-feature">
+            <div>
+                <img class="img-responsive" src="~/Content/Images/pulse.png" />
+            </div>
+            <div>
+                <h3>Doctors Review</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="home-feature">
+            <div>
+                <img class="img-responsive" src="~/Content/Images/health-care-1.png" />
+            </div>
+            <div>
+                <h3>Book an Appointment</h3>
+            </div>
+        </div>
     </div>
 </div>
