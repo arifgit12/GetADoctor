@@ -25,7 +25,9 @@ namespace GetADoctor.Web.Infrastructure.Mapping
                 config.CreateMap<DoctorViewModel, Doctor>();
                 config.CreateMap<Doctor, DoctorViewModel>()
                      .ForMember(d => d.ImageUrl,
-                        opt => opt.MapFrom(x => x.User.ProfilePicUrl));
+                        opt => opt.MapFrom(x => x.User.ProfilePicUrl))
+                    .ForMember(d => d.UserName,
+                        opt => opt.MapFrom(x => x.User.UserName));
 
                 config.CreateMap<PatientViewModel, Patient>();
                 config.CreateMap<Patient, PatientViewModel>();

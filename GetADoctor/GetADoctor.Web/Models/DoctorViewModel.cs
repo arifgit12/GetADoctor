@@ -11,6 +11,8 @@ namespace GetADoctor.Web.Models
     {
         public int DoctorId { get; set; }
 
+        public string UserName { get; set; }
+
         [Required]
         [Display(Name = "First Name")]
         public String FirstName { get; set; }
