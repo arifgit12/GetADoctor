@@ -29,14 +29,21 @@
         <div class="col-md-6">
             <h2>Book Appointment</h2>
             <hr />
-            <h2>Avaiable Dates: </h2>
-            @foreach (var item in schedules)
+            @if (Enumerable.Count(schedules) > 0)
             {
-                <h3>@item.Text</h3>
+                <h2>Avaiable Dates: </h2>
+                foreach (var item in schedules)
+                {
+                    <h3>@item.Text</h3>
+                }
+                <h4>
+                    @Html.ActionLink("BOOK", "Appointment", "Patient", new { id = Model.DoctorId }, new { @class = "btn btn-success" })
+                </h4>
+            }else
+            {
+                <h4>No Dates is avaiable</h4>
             }
-            <h4>
-                @Html.ActionLink("BOOK", "Appointment", "Patient", new { id = Model.DoctorId }, new { @class = "btn btn-success" })
-            </h4>           
+
         </div>   
     </div>
 </div>
