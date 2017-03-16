@@ -11,7 +11,7 @@
             <h2>Doctors Details</h2>
             <hr />
             <div class="col-md-4">
-                @if ((ViewBag.FileName).Length > 0)
+                @if ( ViewBag.FileName != null && (ViewBag.FileName).Length > 0)
                 {
                     <div class="thumbnail">
                         <img class="img-responsive" src="@filePath" alt="account-image" />
@@ -21,7 +21,10 @@
             <div class="col-md-8">
                 <h1>@Model.FirstName @Model.LastName</h1>
                 <p>@Model.CityName</p>
-                <h2>Speciality: @Model.Speciality.Name</h2>
+                @if (@Model.Speciality != null)
+                {
+                    <h2>Speciality: @Model.Speciality.Name</h2>
+                }                
                 <h3>Age: @Model.Age</h3>
                 <h3>Gender: @Model.Gender</h3>
             </div>

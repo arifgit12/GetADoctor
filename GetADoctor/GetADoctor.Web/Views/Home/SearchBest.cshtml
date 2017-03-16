@@ -51,16 +51,25 @@
                         @{
                             var filePath = "../Content/Uploads/Account/" + doctor.UserName + "/" + doctor.ImageUrl;
                         }
-                        <img class="img-circle img-responsive" src=@filePath />
+                        @if (doctor.ImageUrl != null)
+                        {
+                            <img class="img-circle img-responsive" src=@filePath />
+                        }
                     </div>
                     <div class="col-md-8">
                         <div>
-                            <h3>Speciality: @doctor.Speciality.Name</h3>
+                            @if (doctor.Speciality != null)
+                            {
+                                <h3>Speciality: @doctor.Speciality.Name</h3>
+                            }
                             <h3>Name: @doctor.FirstName @doctor.LastName</h3>
                         </div>
                         <div>
                             @Html.ActionLink(doctor.FirstName, "Get", "Doctor", new { id = doctor.DoctorId }, new { @class="btn btn-primary" })
-                            @Html.ActionLink(doctor.Speciality.Name, "Get", "cSpecialities", new { id = doctor.Speciality.Id }, new { @class = "btn btn-primary" })
+                            @if (doctor.Speciality != null)
+                            {
+                                @Html.ActionLink(doctor.Speciality.Name, "Get", "cSpecialities", new { id = doctor.Speciality.Id }, new { @class = "btn btn-primary" })
+                            }
                         </div>
                     </div>
                 </div>
