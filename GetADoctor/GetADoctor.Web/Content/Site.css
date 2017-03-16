@@ -96,14 +96,16 @@ textarea {
     margin: 0 auto;
 }
 
-.search-container {
-    width: 300px;
+.search-row-container {
+    background-color: #fff;
+    box-sizing: border-box;
+    border-bottom: 8px solid #f6f6f6;
+    left: -8px;
+    margin-top: 10px;
+    margin-bottom: 6px;
 }
-.doctor-search-container {
-    border-radius: 2px;
-    background: #f0f0f5;
-    width: 960px;
-    padding: 6px 8px 2px 8px;
+.doctor-search-container {   
+    background-color: #e7e7e7;
 }
 
 .city-container{
@@ -184,6 +186,10 @@ textarea {
     border: 0;
 }
 
+.doc-prof-row {
+    min-height: 180px;
+    position: relative;
+}
 
 hr {
     height: 1px;
