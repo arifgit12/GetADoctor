@@ -35,13 +35,37 @@ namespace GetADoctor.Web.Areas
         }
 
         // GET: Doctor/Appointments
-        public async Task<ActionResult> Appointments()
+        public async Task<ActionResult> Appointments(string sortOrder, int page = 1, int pageSize = 10)
         {
+            page = page > 0 ? page : 1;
+            pageSize = pageSize > 0 ? pageSize : 25;
+
+            ViewBag.NameSortParam = sortOrder == "name" ? "name_desc" : "name";
+            ViewBag.DateSortParam = sortOrder == "date" ? "date_desc" : "date";
+
+            ViewBag.CurrentSort = sortOrder;
+
             string userId = await GetUserId();
             var doctorId = _doctorService.GetDoctorId(userId);
-            var appointments = _doctorService.GetAppointmentsByDoctorId(doctorId).OrderByDescending(s => s.Date);
-            var model = Mapper.Map<IEnumerable<AppointmentViewModel>>(appointments);
-            return View(model);
+            //var appointments = _doctorService.GetAppointmentsByDoctorId(doctorId).OrderByDescending(s => s.Date);
+            var query = _doctorService.GetAppointmentsByDoctorId(doctorId);
+            switch (sortOrder)
+            {
+                case "name":
+                    query = query.OrderBy(x => x.Patient.Name);
+                    break;
+                case "date":
+                    query = query.OrderBy(x => x.Date);
+                    break;
+                case "date_desc":
+                    query = query.OrderByDescending(x => x.Date);
+                    break;
+                default:
+                    break;
+            }
+
+            var model = Mapper.Map<IEnumerable<AppointmentViewModel>>(query);
+            return View(model.ToPagedList(page, pageSize));
         }
 
         public async Task<ActionResult> Schedules()

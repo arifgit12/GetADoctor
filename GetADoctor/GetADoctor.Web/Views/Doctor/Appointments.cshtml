@@ -1,6 +1,15 @@
-﻿@model IEnumerable<GetADoctor.Web.Models.AppointmentViewModel>
+﻿@model PagedList.IPagedList<GetADoctor.Web.Models.AppointmentViewModel>
+@using PagedList.Mvc;
+@using GetADoctor.Web.Infrastructure.CustomHtmlHelper;
 @{
     ViewBag.Title = "Appointments";
+
+    string currentFilter = ViewBag.CurrentFilter;
+    string currentSort = ViewBag.CurrentSort;
+    if (string.IsNullOrEmpty(currentSort))
+    {
+        currentSort = "date_desc";
+    }
 }
 <div class="row">
     <div class="top-bottom-padding">
@@ -8,14 +17,20 @@
         <hr />
     </div>
 </div>
-<div class="row">
-    <table class="table table-bordered table-striped">
+<div class="row table-responsive">
+    <table class="table table-striped table-bordered table-condensed table-hover">
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Date)</th>
-            <th>@Html.DisplayNameFor(model => model.CreatedOn)</th>
-            <th>@Html.DisplayNameFor(model => model.Patient.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.Serial)</th>
-            <th>@Html.DisplayNameFor(model => model.Doctor.Speciality.Name)</th>
+            <th>
+                @Html.ActionLink("Appointment Date", "Appointments", Request.QueryString.ToRouteValueDictionary("sortOrder", (string)ViewBag.DateSortParam))
+                @Html.SortIdentifier(currentSort, "name")
+            </th>
+            <th>
+                @Html.ActionLink("Name", "Appointments", Request.QueryString.ToRouteValueDictionary("sortOrder", (string)ViewBag.NameSortParam))
+                @Html.SortIdentifier(currentSort, "name")
+            </th>
+            <th>@Html.DisplayName("Booked At")</th>
+            <th>@Html.DisplayName("Serial")</th>
+            <th>@Html.DisplayName("Speciality")</th>
         </tr>
         @foreach (var item in Model)
             {
@@ -29,4 +44,15 @@
         }
     </table>
 </div>
+@if (Model.PageCount > 1)
+{
+    <div class="pager">
+        @Html.PagedListPager(Model, page => Url.Action("Appointments", new
+        {
+            page,
+            sortOrder = ViewBag.currentSort
+        }))
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    </div>
+}
 
