@@ -1,1 +1,4 @@
 *.cs linguist-language=csharp
+
+GetADoctor/GetADoctor.Web/Content/* linguist-vendored
+GetADoctor/GetADoctor.Web/Scripts/* linguist-vendored
