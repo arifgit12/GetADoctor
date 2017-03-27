@@ -215,6 +215,7 @@
     <Compile Include="Areas\Admin\Controllers\CitiesController.cs" />
     <Compile Include="Areas\Admin\Controllers\SpecialitiesController.cs" />
     <Compile Include="Areas\Admin\Controllers\StatesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersManageController.cs" />
     <Compile Include="Areas\Admin\Models\CityViewModel.cs" />
     <Compile Include="Areas\Admin\Models\SpecialityViewModel.cs" />
     <Compile Include="Areas\Admin\Models\StateViewModel.cs" />
@@ -393,6 +394,7 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\_bootstrap-datetimepicker.less" />
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
+    <Content Include="Areas\Admin\Views\UsersManage\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
