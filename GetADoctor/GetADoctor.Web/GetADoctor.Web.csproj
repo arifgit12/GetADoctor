@@ -262,7 +262,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\full-slider.css" />
     <Content Include="Content\Images\alcohol.png" />
     <Content Include="Content\Images\asterisk.png" />
     <Content Include="Content\Images\bandage.png" />
@@ -271,6 +270,7 @@
     <Content Include="Content\Images\dentist.png" />
     <Content Include="Content\Images\dna.png" />
     <Content Include="Content\Images\doctor.png" />
+    <Content Include="Content\Images\doctor_banner.jpg" />
     <Content Include="Content\Images\drugs.png" />
     <Content Include="Content\Images\ear.png" />
     <Content Include="Content\Images\emergency.png" />
@@ -278,7 +278,6 @@
     <Content Include="Content\Images\first-aid-kit.png" />
     <Content Include="Content\Images\health-care-1.png" />
     <Content Include="Content\Images\health-care.png" />
-    <Content Include="Content\Images\homepage-image-1.jpg" />
     <Content Include="Content\Images\microscope.png" />
     <Content Include="Content\Images\nurse.png" />
     <Content Include="Content\Images\pharmacy.png" />

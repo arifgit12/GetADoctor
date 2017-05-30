@@ -3,39 +3,68 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="row top-bottom-padding">
-    <div class="page-header new_header">
-        <h1>Find and Book</h1>
-        @using (Html.BeginForm("SearchBest", "Home", FormMethod.Get))
-        {
-            <div class="form-inline">
-                <div class="form-group">
-                    <!--  1 -->
-                    <input class="form-control" type="text" name="name" placeholder="Search By Name" maxlength="70" autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <select class="form-control sm-field" name="speciality">
-                        <!--  2 -->
-                        <option>Select speciality</option>
-                        @foreach (var d in Model.Specialities)
-                        {
-                            <option value=@d.Value> @d.Text  </option>
-                        }
+<div class="row top-home-banner">
+    <div class="container padding-top-40">
+        <div class="row">
+            <div class="col-xs-12 text-left padding-top-0 padding-left-0 padding-bottom-20">
+                <strong class="text-white font-48 margin-top-10 font-lato font-weight-700" style="color: #ffffff;">
+                    Find the best doctors
+                </strong>
+                <p class="text-white font-17 padding-top-15" style="color: #ffffff;">
+                    Get personalized doctor advice &nbsp;|&nbsp; Doctor booking &nbsp;|&nbsp; Find the right doctors
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="homeSearch" class="search-stacks hidden-xs">
+        <ul class="nav nav-tabs container" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#doctors_tab" aria-controls="doctors_tab" role="tab" data-toggle="tab">Find and Book</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane container active" id="doctors_tab">
+                <div class="col-xs-12 padding-top-30 padding-bottom-15">
+                    @using (Html.BeginForm("SearchBest", "Home", FormMethod.Get))
+                    {
+                        <div class="col-md-4 col-sm-4 padding-0">
+                            <div class="form-group text-left">
+                                <span class="fa fa-user-md"></span>
+                                <input class="form-control" type="text" name="name"
+                                       placeholder="Search By Name"  maxlength="70" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 padding-0">
+                            <div class="form-group">
+                                <select class="form-control sm-field" name="speciality">
+                                    <!--  2 -->
+                                    <option>Select speciality</option>
+                                    @foreach (var d in Model.Specialities)
+                                    {
+                                        <option value=@d.Value> @d.Text  </option>
+                                    }
 
-                    </select>
-                </div>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 padding-0">
 
-                <div class="form-group">
-                    <!--  3 -->
-                    <input class="form-control" type="text" name="search" placeholder="Enter City or ZipCode" maxlength="50" autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Search" class="form-control btn btn-success">
+                            <div class="form-group">
+                                <!--  3 -->
+                                <input class="form-control" type="text" name="search" placeholder="Enter City or ZipCode" maxlength="50" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 text-left">
+                            <div class="form-group">
+                                <input type="submit" value="Search" class="form-control btn btn-success">
+                            </div>
+                        </div>
+                    }
+                    <div class="clearfix"></div>
                 </div>
             </div>
-        }
+        </div>
     </div>
-    <hr />
 </div>
 <div class="row home-feature">
     <div class="col-md-6">
