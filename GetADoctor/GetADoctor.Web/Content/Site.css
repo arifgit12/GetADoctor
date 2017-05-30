@@ -197,3 +197,46 @@ hr {
     background-color: #e5e5e5;
     border: none;
 }
+
+.top-home-banner {
+    background: url('Images/doctor_banner.jpg') no-repeat !important;
+    background-size: cover;
+    min-height: 400px;
+    padding-top: 90px;
+    margin-bottom: 15px;
+}
+.top-home-banner .font-48 {
+    font-size: 3.2rem;
+}
+.home-search-form input#keyword,
+.home-search-form input#location {
+    border-radius: 3px;
+}
+
+.padding-top-40 {
+    padding-top: 40px;
+}
+
+.padding-top-30 {
+    padding-top: 30px;
+}
+
+.padding-bottom-15 {
+    padding-bottom: 15px;
+}
+
+.padding-0 {
+    padding: 0px!important;
+}
+
+.search-stacks {
+    min-height: 30vh !important;
+}
+
+/*.search-stacks .nav-tabs {
+    margin-bottom: 1px;
+}
+
+.search-stacks .tab-content {
+    background: rgba(32, 85, 181, 0.69);
+}*/
