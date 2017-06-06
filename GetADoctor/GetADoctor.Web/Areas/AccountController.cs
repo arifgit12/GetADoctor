@@ -110,6 +110,24 @@ namespace GetADoctor.Web.Areas
             switch (result)
             {
                 case SignInStatus.Success:
+                    var user = await UserManager.FindByNameAsync(model.Email);
+
+                    if(await UserManager.IsInRoleAsync(user.Id, UserRoles.Doctor.ToString())){
+
+                        var doctor = user.doctors.Where(id => id.UserId == user.Id).FirstOrDefault();
+                        if (doctor.FirstName == null || doctor.Speciality == null)
+                        {
+                            return RedirectToAction("DoctorProfile", "Manage", new { area = "" });
+                        }
+                    }
+                    else if (await UserManager.IsInRoleAsync(user.Id, UserRoles.Patient.ToString()))
+                    {
+                        var patient = user.Patients.Where(id => id.UserId == user.Id).FirstOrDefault();
+                        if(patient.Name == null && patient.MobileNumber == null)
+                        {
+                            return RedirectToAction("UserProfile", "Manage", new { area = "" });
+                        }
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
